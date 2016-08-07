@@ -26,8 +26,8 @@
 		40469AA21D57CC58008025B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40469AAE1D57CF8A008025B2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		40469AAF1D57CF8A008025B2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		40469AAE1D57CF8A008025B2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = CPUSimulator/LICENSE; sourceTree = "<group>"; };
+		40469AAF1D57CF8A008025B2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = CPUSimulator/README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +44,8 @@
 		40469A8C1D57CC58008025B2 = {
 			isa = PBXGroup;
 			children = (
+				40469AAE1D57CF8A008025B2 /* LICENSE */,
+				40469AAF1D57CF8A008025B2 /* README.md */,
 				40469A971D57CC58008025B2 /* CPUSimulator */,
 				40469A961D57CC58008025B2 /* Products */,
 			);
@@ -62,8 +64,6 @@
 			children = (
 				40469A9A1D57CC58008025B2 /* ViewController.swift */,
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
-				40469AAE1D57CF8A008025B2 /* LICENSE */,
-				40469AAF1D57CF8A008025B2 /* README.md */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
 			);
 			path = CPUSimulator;
