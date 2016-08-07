@@ -13,6 +13,8 @@
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
 		40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA21D57CC58008025B2 /* Assets.xcassets */; };
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
+		40469AB01D57CF8A008025B2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 40469AAE1D57CF8A008025B2 /* LICENSE */; };
+		40469AB11D57CF8A008025B2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 40469AAF1D57CF8A008025B2 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		40469AA21D57CC58008025B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40469AAE1D57CF8A008025B2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		40469AAF1D57CF8A008025B2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,25 @@
 		40469A971D57CC58008025B2 /* CPUSimulator */ = {
 			isa = PBXGroup;
 			children = (
-				40469A981D57CC58008025B2 /* AppDelegate.swift */,
 				40469A9A1D57CC58008025B2 /* ViewController.swift */,
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
+				40469AAE1D57CF8A008025B2 /* LICENSE */,
+				40469AAF1D57CF8A008025B2 /* README.md */,
+				40469AAD1D57CF3B008025B2 /* Supporting Files */,
+			);
+			path = CPUSimulator;
+			sourceTree = "<group>";
+		};
+		40469AAD1D57CF3B008025B2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40469A981D57CC58008025B2 /* AppDelegate.swift */,
 				40469AA21D57CC58008025B2 /* Assets.xcassets */,
 				40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */,
 				40469AA71D57CC58008025B2 /* Info.plist */,
 				40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */,
 			);
-			path = CPUSimulator;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +141,7 @@
 			files = (
 				40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */,
 				40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */,
+				40469AB01D57CF8A008025B2 /* LICENSE in Resources */,
 				40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +155,7 @@
 			files = (
 				40469A9B1D57CC58008025B2 /* ViewController.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
+				40469AB11D57CF8A008025B2 /* README.md in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
