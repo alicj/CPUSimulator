@@ -16,19 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ChS-WR-zlq" customClass="RegisterView" customModule="CPUSimulator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ChS-WR-zlq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="444-6s-YkA"/>
-                            <constraint firstItem="ChS-WR-zlq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6Oz-Li-mN7"/>
-                            <constraint firstAttribute="trailing" secondItem="ChS-WR-zlq" secondAttribute="trailing" id="gRE-zr-4on"/>
-                            <constraint firstItem="ChS-WR-zlq" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="yrU-Yd-hg5"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
