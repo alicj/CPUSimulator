@@ -7,27 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16187A811D737733007869BA /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A801D737733007869BA /* RegisterView.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
-		40469A9B1D57CC58008025B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9A1D57CC58008025B2 /* ViewController.swift */; };
+		40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9A1D57CC58008025B2 /* CPUViewController.swift */; };
 		40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469A9C1D57CC58008025B2 /* Main.storyboard */; };
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
 		40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA21D57CC58008025B2 /* Assets.xcassets */; };
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
-		40469AB01D57CF8A008025B2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 40469AAE1D57CF8A008025B2 /* LICENSE */; };
-		40469AB11D57CF8A008025B2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 40469AAF1D57CF8A008025B2 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16187A801D737733007869BA /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		40469A951D57CC58008025B2 /* CPUSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPUSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40469A981D57CC58008025B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40469A9A1D57CC58008025B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		40469A9A1D57CC58008025B2 /* CPUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUViewController.swift; sourceTree = "<group>"; };
 		40469A9D1D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40469AA01D57CC58008025B2 /* CPUSimulator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CPUSimulator.xcdatamodel; sourceTree = "<group>"; };
 		40469AA21D57CC58008025B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40469AAE1D57CF8A008025B2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = CPUSimulator/LICENSE; sourceTree = "<group>"; };
-		40469AAF1D57CF8A008025B2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = CPUSimulator/README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +42,6 @@
 		40469A8C1D57CC58008025B2 = {
 			isa = PBXGroup;
 			children = (
-				40469AAE1D57CF8A008025B2 /* LICENSE */,
-				40469AAF1D57CF8A008025B2 /* README.md */,
 				40469A971D57CC58008025B2 /* CPUSimulator */,
 				40469A961D57CC58008025B2 /* Products */,
 			);
@@ -62,8 +58,9 @@
 		40469A971D57CC58008025B2 /* CPUSimulator */ = {
 			isa = PBXGroup;
 			children = (
-				40469A9A1D57CC58008025B2 /* ViewController.swift */,
+				40469A9A1D57CC58008025B2 /* CPUViewController.swift */,
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
+				16187A801D737733007869BA /* RegisterView.swift */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
 			);
 			path = CPUSimulator;
@@ -141,7 +138,6 @@
 			files = (
 				40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */,
 				40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */,
-				40469AB01D57CF8A008025B2 /* LICENSE in Resources */,
 				40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,9 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40469A9B1D57CC58008025B2 /* ViewController.swift in Sources */,
+				40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */,
+				16187A811D737733007869BA /* RegisterView.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
-				40469AB11D57CF8A008025B2 /* README.md in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +304,7 @@
 				40469AAC1D57CC58008025B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
