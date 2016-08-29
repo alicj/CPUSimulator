@@ -15,13 +15,14 @@ class CPUViewController: UIViewController {
         // Dispose of any resources that can be recreated
     }
     
-    // TODO with portions
-    var registerView = RegisterView(frame: CGRect(x: 450, y: 700, width: 0, height: 0))
+    var registerView = RegisterView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
+    var aluView = ALUView(frame: CGRect(x: 450, y: (700 + 240), width: 560, height: 240))
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
         super.view.addSubview(registerView)
+        super.view.addSubview(aluView)
     }
 
 }
