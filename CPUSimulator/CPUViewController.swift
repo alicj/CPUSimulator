@@ -18,17 +18,19 @@ class CPUViewController: UIViewController {
     var registerView = RegisterView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
     var aluView = ALUView(frame: CGRect(x: 450, y: (700 + 240), width: 560, height: 240))
     var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
-    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
     
-    var temp = InstructionBlockViewController()
+    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
+    var instructionBlockController = InstructionBlockViewController()
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
         super.view.addSubview(registerView)
         super.view.addSubview(aluView)
         super.view.addSubview(memoryBlockView)
-        self.instructionBlockView.delegate = temp
-        self.instructionBlockView.dataSource = temp
+        
+        self.instructionBlockView.delegate = instructionBlockController
+        self.instructionBlockView.dataSource = instructionBlockController
         self.view.addSubview(instructionBlockView)
     }
 

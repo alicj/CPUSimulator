@@ -12,8 +12,8 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     
     let instructionContent = InstructionBlockData()
     
-    var level = 0
-
+    var level = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

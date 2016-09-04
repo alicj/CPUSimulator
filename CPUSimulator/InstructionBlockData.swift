@@ -34,36 +34,6 @@ class InstructionBlockData {
         instructionLoadLevelData()
     }
     
-    private func instructionLoadLevelData() {
-        int_arr = [[instruction_array[2], instruction_array[2],instruction_array[3],
-            instruction_array[2], instruction_array[1]],
-                   [],
-                   [],
-                   [],
-                   [],
-                   []]
-        reg_left_arr = [[register_array[0], register_array[1], register_array[2],
-            register_array[3], register_array[3]],
-                        [],
-                        [],
-                        [],
-                        [],
-                        []]
-        reg_right_arr = [[register_array[8], register_array[8], register_array[0],
-            register_array[8], register_array[8]],
-                         [],
-                         [],
-                         [],
-                         [],
-                         []]
-        val_arr = [["10", "12", register_array[1], "5", " "],
-                   [],
-                   [],
-                   [],
-                   [],
-                   []]
-    }
-    
     func getRows(level: Int) -> Int {
         return int_arr[level].count
     }
@@ -84,5 +54,62 @@ class InstructionBlockData {
             data = val_arr[level][row]
         }
         return data
+    }
+    
+    private func instructionLoadLevelData() {
+        loadInstructions()
+        loadRegisterLeft()
+        loadRegisterRight()
+        loadValue()
+    }
+
+    private func loadInstructions() {
+      // level 1
+      int_arr.append([instruction_array[2], instruction_array[2],instruction_array[3],
+                      instruction_array[2], instruction_array[1], instruction_array[11]])
+      // level 2
+      int_arr.append([instruction_array[2], instruction_array[0], instruction_array[2],
+                      instruction_array[4], instruction_array[2], instruction_array[1],
+                      instruction_array[2], instruction_array[0], instruction_array[4],
+                      instruction_array[2], instruction_array[1], instruction_array[11]])
+      // level 3
+//      int_arr.append()
+    }
+
+    private func loadRegisterLeft() {
+      // level 1
+      reg_left_arr.append([register_array[0], register_array[1], register_array[2],
+                           register_array[3], register_array[3], register_array[8]])
+      // level 2
+      reg_left_arr.append([register_array[0], register_array[0], register_array[1],
+                           register_array[0], register_array[2], register_array[0],
+                           register_array[0], register_array[0], register_array[0],
+                           register_array[2], register_array[0], register_array[8]])
+      // level 3
+//      reg_left_arr.append()
+    }
+
+    private func loadRegisterRight() {
+      // level 1
+      reg_right_arr.append([register_array[8], register_array[8], register_array[0],
+                            register_array[8], register_array[8], register_array[8]])
+      // level 2
+      reg_right_arr.append([register_array[8], register_array[0], register_array[8],
+                            register_array[1], register_array[2], register_array[2],
+                            register_array[8], register_array[0], register_array[1],
+                            register_array[8], register_array[2], register_array[8]])
+      // level 3
+//      reg_right_arr.append()
+        
+    }
+
+    private func loadValue() {
+      // level 1
+      val_arr.append(["10", "12", register_array[1], "5", " "])
+      // level 2
+      val_arr.append(["1", " ", "20", " ", "1", " ", "2", " ", " ", "2", " ", " "])
+      // level 3
+//      val_arr.append()
+
     }
 }
