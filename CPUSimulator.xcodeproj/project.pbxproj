@@ -11,6 +11,7 @@
 		16187A831D739D51007869BA /* ALUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A821D739D51007869BA /* ALUView.swift */; };
 		16187A871D751D4B007869BA /* InstructionBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A861D751D4B007869BA /* InstructionBlockView.swift */; };
 		16187A891D751D72007869BA /* MemoryBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A881D751D72007869BA /* MemoryBlockView.swift */; };
+		16187A8D1D7915B1007869BA /* InstructionBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A8C1D7915B1007869BA /* InstructionBlockViewController.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
 		40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9A1D57CC58008025B2 /* CPUViewController.swift */; };
 		40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469A9C1D57CC58008025B2 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		16187A821D739D51007869BA /* ALUView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALUView.swift; sourceTree = "<group>"; };
 		16187A861D751D4B007869BA /* InstructionBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockView.swift; sourceTree = "<group>"; };
 		16187A881D751D72007869BA /* MemoryBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBlockView.swift; sourceTree = "<group>"; };
+		16187A8C1D7915B1007869BA /* InstructionBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockViewController.swift; sourceTree = "<group>"; };
 		40469A951D57CC58008025B2 /* CPUSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPUSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40469A981D57CC58008025B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40469A9A1D57CC58008025B2 /* CPUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				16187A821D739D51007869BA /* ALUView.swift */,
 				16187A881D751D72007869BA /* MemoryBlockView.swift */,
 				16187A861D751D4B007869BA /* InstructionBlockView.swift */,
+				16187A8C1D7915B1007869BA /* InstructionBlockViewController.swift */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
 			);
 			path = CPUSimulator;
@@ -161,6 +164,7 @@
 				40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */,
 				16187A871D751D4B007869BA /* InstructionBlockView.swift in Sources */,
 				16187A891D751D72007869BA /* MemoryBlockView.swift in Sources */,
+				16187A8D1D7915B1007869BA /* InstructionBlockViewController.swift in Sources */,
 				16187A811D737733007869BA /* RegisterView.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
