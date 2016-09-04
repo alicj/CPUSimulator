@@ -10,12 +10,16 @@ import UIKit
 
 class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    let instructionContent = InstructionBlockData()
-    
-    var level = 1
+    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
+
+    private let instructionContent = InstructionBlockData()
+    private var level = 0
+    private var stage = 0
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        instructionBlockView.delegate = self
+        instructionBlockView.dataSource = self
+        super.view.addSubview(instructionBlockView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,5 +44,22 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         let data = instructionContent.getColumnContent(level, row: row, col: component)
         return data
     }
-
+    
+    func nextStage () {
+        // still in the same level
+        if(stage < instructionContent.getRows(level)) {
+            stage += 1
+        }
+        // move to next level
+        else {
+            nextLevel()
+        }
+    }
+    
+    // reload the view with new components equal to new level
+    func nextLevel() {
+        level += 1
+        stage = 0
+        instructionBlockView.reloadAllComponents()
+    }
 }
