@@ -105,7 +105,7 @@ class InstructionBlockData {
 
     private func loadValue() {
       // level 1
-      val_arr.append(["10", "12", register_array[1], "5", " "])
+      val_arr.append(["10", "12", register_array[1], "5", " ", " "])
       // level 2
       val_arr.append(["1", " ", "20", " ", "1", " ", "2", " ", " ", "2", " ", " "])
       // level 3

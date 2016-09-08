@@ -11,15 +11,27 @@ import UIKit
 class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
-
+    
+    // debug button
+    var nextLevelButton = UIButton(frame: CGRect(x: 500, y: 50, width: 100, height: 50))
+    
     private let instructionContent = InstructionBlockData()
     private var level = 0
-    private var stage = 0
+    private var programCounter = 0
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
+        //        instructionBlockView.userInteractionEnabled = false
         super.view.addSubview(instructionBlockView)
+        
+        nextLevelButton.backgroundColor = .blackColor()
+        nextLevelButton.setTitle("Next Instr", forState: .Normal)
+        nextLevelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
+        
+        super.view.addSubview(nextLevelButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,14 +41,14 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        let rows = instructionContent.getColumns()
-        return rows
+        let columns = instructionContent.getColumns()
+        return columns
     }
 
     // The number of rows of data
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let columns = instructionContent.getRows(level)
-        return columns
+        let rows = instructionContent.getRows(level)
+        return rows
     }
     
     // The data to return for the row and component (column) that's being passed in
@@ -45,10 +57,19 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         return data
     }
     
+    func pickerSelectRow(row: Int, animated: Bool) {
+        for i in 0...(instructionBlockView.numberOfComponents - 1) {
+            instructionBlockView.selectRow(row, inComponent: i, animated: animated)
+        }
+    }
+
+
     func nextStage () {
         // still in the same level
-        if(stage < instructionContent.getRows(level)) {
-            stage += 1
+        if(programCounter < instructionContent.getRows(level) - 1) {
+            programCounter += 1
+            // move picker items down by 1
+            pickerSelectRow(programCounter, animated: true)
         }
         // move to next level
         else {
@@ -59,7 +80,12 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     // reload the view with new components equal to new level
     func nextLevel() {
         level += 1
-        stage = 0
+        programCounter = 0
         instructionBlockView.reloadAllComponents()
+        pickerSelectRow(0, animated: false)
+    }
+    
+    func buttonAction() {
+        nextStage();
     }
 }
