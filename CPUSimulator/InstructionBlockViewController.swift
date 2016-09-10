@@ -15,7 +15,6 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     // debug button
     var nextLevelButton = UIButton(frame: CGRect(x: 500, y: 50, width: 100, height: 50))
     
-    private let instructionContent = InstructionBlockData()
     private var level = 0
     private var programCounter = 0
     
@@ -33,7 +32,7 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         
         super.view.addSubview(nextLevelButton)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,44 +40,111 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        let columns = instructionContent.getColumns()
-        return columns
+        return 4
     }
-
+    
     // The number of rows of data
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let rows = instructionContent.getRows(level)
-        return rows
+        return LEVELS[level].count
     }
     
     // The data to return for the row and component (column) that's being passed in
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let data = instructionContent.getColumnContent(level, row: row, col: component)
-        return data
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent col: Int) -> String? {
+        let instr = LEVELS[level][row]
+        switch instr {
+        case let .Load           (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Load", values: [rg1, rg2, rg3])
+            
+        case let .Store          (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Store", values: [rg1, rg2, rg3])
+            
+        case let .LoadImmediate  (rg, val):
+            return processInstructionWithTwoValues(col, name: "LoadImmediate", values: [rg, val])
+            
+        case let .Add            (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Add", values: [rg1, rg2, rg3])
+
+        case let .Multiply       (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Multiply", values: [rg1, rg2, rg3])
+
+        case let .And            (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "And", values: [rg1, rg2, rg3])
+
+        case let .Or             (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Or", values: [rg1, rg2, rg3])
+
+        case let .Not            (rg1, rg2, rg3):
+            return processInstructionWithThreeValues(col, name: "Not", values: [rg1, rg2, rg3])
+
+        case let .Rotate         (rg1, rg2, val):
+            return processInstructionWithThreeValues(col, name: "Rotate", values: [rg1, rg2, val])
+
+        case let .Compare        (rg1, rg2):
+            return processInstructionWithTwoValues(col, name: "Compare", values: [rg1, rg2])
+
+        case let .Branch         (_, rg1): //FIXME
+            if col == 0 {
+                return "Branch"
+            }else if col == 2 {
+                return String(rg1)
+            }
+            return ""
+
+        case .Halt:
+            if col == 0 {
+                return "Halt"
+            }
+            return ""
+
+        }
     }
     
-    func pickerSelectRow(row: Int, animated: Bool) {
+    // ================
+    // CUSTOM FUNCTIONS
+    // ================
+    
+    private func processInstructionWithTwoValues(col: Int, name:String, values: [Int]) -> String {
+        if (col == 0) {
+            return name
+        }else if (col <= 2) {
+            return String(values[col-1])
+        }else {
+            return ""
+        }
+    }
+    
+    private func processInstructionWithThreeValues(col: Int, name:String, values: [Int]) -> String {
+        if (col == 0) {
+            return name
+        }
+        return String(values[col-1])
+    }
+    
+    private func pickerSelectRow(row: Int, animated: Bool) {
         for i in 0...(instructionBlockView.numberOfComponents - 1) {
             instructionBlockView.selectRow(row, inComponent: i, animated: animated)
         }
     }
-
-
-    func nextStage () {
+    
+    
+    private func nextStage () {
         // still in the same level
-        if(programCounter < instructionContent.getRows(level) - 1) {
+        if(programCounter < LEVELS[level].count - 1) {
             programCounter += 1
             // move picker items down by 1
             pickerSelectRow(programCounter, animated: true)
         }
-        // move to next level
+            // move to next level
         else {
             nextLevel()
         }
     }
     
     // reload the view with new components equal to new level
-    func nextLevel() {
+    private func nextLevel() {
+        if level == LEVELS.count - 1 {
+            return
+        }
         level += 1
         programCounter = 0
         instructionBlockView.reloadAllComponents()
