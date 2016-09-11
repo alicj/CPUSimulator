@@ -8,12 +8,13 @@
 
 import UIKit
 
-class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
+    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height:
+        240))
     
     // debug button
-    var nextLevelButton = UIButton(frame: CGRect(x: 500, y: 50, width: 100, height: 50))
+    private var nextLevelButton = UIButton(frame: CGRect(x: 500, y: 50, width: 100, height: 50))
     
     private var level = 0
     private var programCounter = 0
@@ -23,13 +24,14 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
-        //        instructionBlockView.userInteractionEnabled = false
+        instructionBlockView.userInteractionEnabled = false
+        instructionBlockView.layer.borderWidth = 2
+        instructionBlockView.layer.borderColor = UIColor.redColor().CGColor
         super.view.addSubview(instructionBlockView)
         
         nextLevelButton.backgroundColor = .blackColor()
         nextLevelButton.setTitle("Next Instr", forState: .Normal)
-        nextLevelButton.addTarget(self, action: #selector(buttonAction), forControlEvents: .TouchUpInside)
-        
+        nextLevelButton.addTarget(self, action: #selector(nextStage), forControlEvents: .TouchUpInside)
         super.view.addSubview(nextLevelButton)
     }
     
@@ -54,34 +56,24 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         switch instr {
         case let .Load           (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Load", values: [rg1, rg2, rg3])
-            
         case let .Store          (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Store", values: [rg1, rg2, rg3])
-            
         case let .LoadImmediate  (rg, val):
             return processInstructionWithTwoValues(col, name: "LoadImmediate", values: [rg, val])
-            
         case let .Add            (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Add", values: [rg1, rg2, rg3])
-
         case let .Multiply       (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Multiply", values: [rg1, rg2, rg3])
-
         case let .And            (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "And", values: [rg1, rg2, rg3])
-
         case let .Or             (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Or", values: [rg1, rg2, rg3])
-
         case let .Not            (rg1, rg2, rg3):
             return processInstructionWithThreeValues(col, name: "Not", values: [rg1, rg2, rg3])
-
         case let .Rotate         (rg1, rg2, val):
             return processInstructionWithThreeValues(col, name: "Rotate", values: [rg1, rg2, val])
-
         case let .Compare        (rg1, rg2):
             return processInstructionWithTwoValues(col, name: "Compare", values: [rg1, rg2])
-
         case let .Branch         (_, rg1): //FIXME
             if col == 0 {
                 return "Branch"
@@ -89,13 +81,11 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
                 return String(rg1)
             }
             return ""
-
         case .Halt:
             if col == 0 {
                 return "Halt"
             }
             return ""
-
         }
     }
     
@@ -127,7 +117,7 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
     }
     
     
-    private func nextStage () {
+    internal func nextStage () {
         // still in the same level
         if(programCounter < LEVELS[level].count - 1) {
             programCounter += 1
@@ -150,8 +140,5 @@ class InstructionBlockViewController: UIViewController, UIPickerViewDataSource, 
         instructionBlockView.reloadAllComponents()
         pickerSelectRow(0, animated: false)
     }
-    
-    func buttonAction() {
-        nextStage();
-    }
+
 }

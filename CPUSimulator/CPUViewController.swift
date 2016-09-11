@@ -25,7 +25,7 @@ class CPUViewController: UIViewController {
     var instructionBlockController = UIViewController()
     
     private func addInstructionViewController() {
-        instructionBlockController = InstructionBlockViewController()
+        instructionBlockController = InstructionBlockController()
         addChildViewController(instructionBlockController)
         self.view.addSubview(instructionBlockController.view)
         instructionBlockController.didMoveToParentViewController(self)
