@@ -55,25 +55,25 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         let instr = LEVELS[level][row]
         switch instr {
         case let .Load           (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Load", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Load", values: [rg1, rg2, rg3])
         case let .Store          (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Store", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Store", values: [rg1, rg2, rg3])
         case let .LoadImmediate  (rg, val):
-            return processInstructionWithTwoValues(col, name: "LoadImmediate", values: [rg, val])
+            return processInstruction(col, name: "LoadImmediate", values: [rg, val])
         case let .Add            (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Add", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Add", values: [rg1, rg2, rg3])
         case let .Multiply       (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Multiply", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Multiply", values: [rg1, rg2, rg3])
         case let .And            (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "And", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "And", values: [rg1, rg2, rg3])
         case let .Or             (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Or", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Or", values: [rg1, rg2, rg3])
         case let .Not            (rg1, rg2, rg3):
-            return processInstructionWithThreeValues(col, name: "Not", values: [rg1, rg2, rg3])
+            return processInstruction(col, name: "Not", values: [rg1, rg2, rg3])
         case let .Rotate         (rg1, rg2, val):
-            return processInstructionWithThreeValues(col, name: "Rotate", values: [rg1, rg2, val])
+            return processInstruction(col, name: "Rotate", values: [rg1, rg2, val])
         case let .Compare        (rg1, rg2):
-            return processInstructionWithTwoValues(col, name: "Compare", values: [rg1, rg2])
+            return processInstruction(col, name: "Compare", values: [rg1, rg2])
         case let .Branch         (_, rg1): //FIXME
             if col == 0 {
                 return "Branch"
@@ -93,21 +93,17 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     // CUSTOM FUNCTIONS
     // ================
     
-    private func processInstructionWithTwoValues(col: Int, name:String, values: [Int]) -> String {
+    private func processInstruction(col: Int, name: String, values: [Int]) -> String {
         if (col == 0) {
             return name
         }else if (col <= 2) {
             return String(values[col-1])
         }else {
-            return ""
+            if (values.count == 2) {
+                return ""
+            }
+            return String(values[col-1])
         }
-    }
-    
-    private func processInstructionWithThreeValues(col: Int, name:String, values: [Int]) -> String {
-        if (col == 0) {
-            return name
-        }
-        return String(values[col-1])
     }
     
     private func pickerSelectRow(row: Int, animated: Bool) {
