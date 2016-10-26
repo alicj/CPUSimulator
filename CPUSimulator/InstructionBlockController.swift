@@ -10,8 +10,7 @@ import UIKit
 
 class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height:
-        240))
+    var instructionBlockView = InstructionBlockView(frame: CGRect(x: 500, y: (700-2*240), width: 500, height: 240))
     
     // debug button
     private var nextLevelButton = UIButton(frame: CGRect(x: 500, y: 50, width: 100, height: 50))
@@ -93,15 +92,16 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     // CUSTOM FUNCTIONS
     // ================
     
+    internal func getCurrentInstruction() -> Instruction {
+        return LEVELS[level][programCounter]
+    }
+    
     private func processInstruction(col: Int, name: String, values: [Int]) -> String {
         if (col == 0) {
             return name
-        }else if (col <= 2) {
-            return String(values[col-1])
+        }else if (col == 3 && values.count == 2) {
+            return ""
         }else {
-            if (values.count == 2) {
-                return ""
-            }
             return String(values[col-1])
         }
     }
@@ -111,7 +111,6 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
             instructionBlockView.selectRow(row, inComponent: i, animated: animated)
         }
     }
-    
     
     internal func nextStage () {
         // still in the same level

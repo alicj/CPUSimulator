@@ -13,12 +13,12 @@
 		16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A8C1D7915B1007869BA /* InstructionBlockController.swift */; };
 		401980521D8250C100C134DB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401980511D8250C100C134DB /* Enums.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
-		40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9A1D57CC58008025B2 /* CPUViewController.swift */; };
 		40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469A9C1D57CC58008025B2 /* Main.storyboard */; };
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
 		40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA21D57CC58008025B2 /* Assets.xcassets */; };
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
 		405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */; };
+		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
 		40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5C3201D8496B4004FC0EC /* Levels.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +37,7 @@
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockView.swift; sourceTree = "<group>"; };
+		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		40E5C3201D8496B4004FC0EC /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,12 +71,13 @@
 		40469A971D57CC58008025B2 /* CPUSimulator */ = {
 			isa = PBXGroup;
 			children = (
-				40469A9A1D57CC58008025B2 /* CPUViewController.swift */,
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
+				405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */,
 				16187A801D737733007869BA /* RegisterView.swift */,
 				16187A821D739D51007869BA /* ALUView.swift */,
 				16187A881D751D72007869BA /* MemoryBlockView.swift */,
-				405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */,
+				4075222B1DC048DB00365D78 /* DraggableView.swift */,
+				40469A9A1D57CC58008025B2 /* CPUViewController.swift */,
 				16187A8C1D7915B1007869BA /* InstructionBlockController.swift */,
 				401980511D8250C100C134DB /* Enums.swift */,
 				40E5C3201D8496B4004FC0EC /* Levels.swift */,
@@ -167,7 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40469A9B1D57CC58008025B2 /* CPUViewController.swift in Sources */,
+				4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */,
 				40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */,
 				16187A891D751D72007869BA /* MemoryBlockView.swift in Sources */,
 				16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */,
