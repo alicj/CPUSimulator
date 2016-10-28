@@ -22,7 +22,6 @@ class DraggableView: UIView {
         }
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,18 +30,14 @@ class DraggableView: UIView {
         
         label.textColor = UIColor.blueColor()
         label.textAlignment = NSTextAlignment.Center
+        lastLocation = self.center
+
         self.addSubview(label)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touches draggableView!")
-        lastLocation = self.center
-        self.superview?.bringSubviewToFront(self)
     }
     
 }

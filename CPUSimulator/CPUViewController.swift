@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CPUViewController.swift
 //  CPUSimulator
 //
 //  Created by Alic on 2016-08-07.
@@ -10,6 +10,10 @@ import UIKit
 
 class CPUViewController: UIViewController {
     
+    //Constants
+    private let DRAGGABLE_SIZE = CGSize(width: 50, height: 50)
+    private let INSTR_DRAGGABLE_ORIGIN = CGPoint(x: 950, y: 700-2*240)
+    
     // variables for draggables
     private var selectedView:UIView?
     private var labelView = UILabel()
@@ -17,7 +21,7 @@ class CPUViewController: UIViewController {
     
     private var level = 0
     
-    private var registerView = RegisterView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
+    private var registerBlockView = RegisterBlockView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
     private var aluView = ALUView(frame: CGRect(x: 450, y: (700 + 240), width: 560, height: 240))
     private var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
     // instruction view
@@ -28,13 +32,13 @@ class CPUViewController: UIViewController {
         super.viewDidLoad()
         addInstructionViewController()
         
-        self.view.addSubview(registerView)
+        self.view.addSubview(registerBlockView)
         self.view.addSubview(aluView)
         self.view.addSubview(memoryBlockView)
         
         //        self.view.backgroundColor = UIColor.whiteColor()
         //        self.view.tintColor = UIColor.blueColor()
-        
+
         setupGestures()
         
         processInstruction()
@@ -66,28 +70,24 @@ class CPUViewController: UIViewController {
             print("began")
             selectedView = self.view.hitTest(p, withEvent: nil)
             
-            if selectedView != nil {
-                self.view.bringSubviewToFront(selectedView!)
-            }
-            
             if let subview = selectedView as? DraggableView {
                 self.view.bringSubviewToFront(subview)
                 dragOrigin = subview.lastLocation
             }
         case .Changed:
+            print("changed")
             if let subview = selectedView as? DraggableView {
                 subview.center = p
             }
         case .Ended:
             print("ended")
             if let subview = selectedView as? DraggableView {
-                //                if subview.frame.intersects(labelView.frame) {
-                //                    print(true)
-                //                }else{
-                //                    print(false)
-                //                    subview.center = dragOrigin
-                //                }
-                subview.center = dragOrigin
+                if subview.frame.intersects(labelView.frame) {
+                    print(true)
+                }else{
+                    print(false)
+                    subview.center = dragOrigin
+                }
                 
             }
             selectedView = nil
@@ -97,11 +97,43 @@ class CPUViewController: UIViewController {
     }
     
     private func processInstruction(){
-        let draggable = DraggableView(frame: CGRect(x: 500, y: (700-2*240), width: 50, height: 50))
-        draggable.labelText = "5";
+        let instr = instructionBlockController.getCurrentInstruction()
+        print(instr)
+
+        switch instr {
+        case let .Load           (rg1, rg2, rg3):
+            return
+        case let .Store          (rg1, rg2, rg3):
+            return
+        case let .LoadImmediate  (rg, val):
+            createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val))
+            return
+        case let .Add            (rg1, rg2, rg3):
+            return
+        case let .Multiply       (rg1, rg2, rg3):
+            return
+        case let .And            (rg1, rg2, rg3):
+            return
+        case let .Or             (rg1, rg2, rg3):
+            return
+        case let .Not            (rg1, rg2, rg3):
+            return
+        case let .Rotate         (rg1, rg2, val):
+            return
+        case let .Compare        (rg1, rg2):
+            return
+        case let .Branch         (_, rg1): //FIXME
+            return
+        case .Halt:
+            return
+        }
+
+    }
+    
+    private func createDraggable(origin: CGPoint, value: String) {
+        let draggable = DraggableView(frame: CGRect(origin: origin, size: DRAGGABLE_SIZE))
+        draggable.labelText = value;
         self.view.addSubview(draggable)
-        self.view.bringSubviewToFront(draggable)
-        print(draggable.layer.zPosition)
     }
     
 }
