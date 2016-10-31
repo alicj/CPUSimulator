@@ -27,7 +27,15 @@ internal enum Order {
     case LT, EQ, GT
 }
 
+internal enum State {
+    case Null
+    case WaitForDrag
+    case ValidateDrag
+}
+
 
 internal typealias RegisterNumber = Int
 internal typealias RegisterValue = Int
 internal typealias ComparisonResult = Order
+
+

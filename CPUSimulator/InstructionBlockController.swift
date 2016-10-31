@@ -52,6 +52,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     // The data to return for the row and component (column) that's being passed in
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent col: Int) -> String? {
         let instr = LEVELS[level][row]
+        // try to get the values of each instruction as a list and call function all together
         switch instr {
         case let .Load           (rg1, rg2, rg3):
             return processInstruction(col, name: "Load", values: [rg1, rg2, rg3])

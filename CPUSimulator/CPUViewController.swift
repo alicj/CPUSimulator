@@ -16,15 +16,23 @@ class CPUViewController: UIViewController {
     
     // variables for draggables
     private var selectedView:UIView?
-    private var labelView = UILabel()
     private var dragOrigin = CGPoint()
     
-    private var level = 0
+    private var targetView: UIView?
     
+    private var gameState: State = State.Null {
+        willSet{
+            print("will set `state` to \(newValue)")
+        }
+        didSet{
+            print("did set `state`")
+        }
+    }
+    
+    // views and controllers
     private var registerBlockView = RegisterBlockView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
     private var aluView = ALUView(frame: CGRect(x: 450, y: (700 + 240), width: 560, height: 240))
     private var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
-    // instruction view
     private var instructionBlockController = InstructionBlockController()
     
     override func viewDidLoad() {
@@ -67,7 +75,6 @@ class CPUViewController: UIViewController {
         
         switch rec.state {
         case .Began:
-            print("began")
             selectedView = self.view.hitTest(p, withEvent: nil)
             
             if let subview = selectedView as? DraggableView {
@@ -75,15 +82,16 @@ class CPUViewController: UIViewController {
                 dragOrigin = subview.lastLocation
             }
         case .Changed:
-            print("changed")
             if let subview = selectedView as? DraggableView {
                 subview.center = p
             }
         case .Ended:
-            print("ended")
             if let subview = selectedView as? DraggableView {
-                if subview.frame.intersects(labelView.frame) {
-                    print(true)
+                print (subview.frame.intersects(registerBlockView.getRegView(regNum: 0).frame))
+                if subview.frame.intersects(targetView!.frame) {
+                    if gameState == State.WaitForDrag {
+                        gameState = State.ValidateDrag
+                    }
                 }else{
                     print(false)
                     subview.center = dragOrigin
@@ -96,7 +104,7 @@ class CPUViewController: UIViewController {
         }
     }
     
-    private func processInstruction(){
+    func processInstruction(){
         let instr = instructionBlockController.getCurrentInstruction()
         print(instr)
 
@@ -107,6 +115,15 @@ class CPUViewController: UIViewController {
             return
         case let .LoadImmediate  (rg, val):
             createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val))
+            targetView = registerBlockView.getRegView(regNum: rg - 1)
+            
+            targetView!.layer.borderColor = UIColor.blueColor().CGColor
+            targetView!.layer.borderWidth = 5
+            print(targetView!.frame.size)
+            
+            self.view.bringSubviewToFront(targetView!)
+            print(targetView!.center)
+            gameState = State.WaitForDrag
             return
         case let .Add            (rg1, rg2, rg3):
             return
@@ -128,6 +145,10 @@ class CPUViewController: UIViewController {
             return
         }
 
+    }
+    
+    private func validateInstruction(subview: UIView){
+        
     }
     
     private func createDraggable(origin: CGPoint, value: String) {

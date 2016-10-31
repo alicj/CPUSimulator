@@ -21,6 +21,7 @@
 		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
 		40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C831DC1AA020040C25D /* CPUViewController.swift */; };
 		40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C871DC1AED60040C25D /* RegisterView.swift */; };
+		40E09C8A1DC2F99B0040C25D /* designs.md in Resources */ = {isa = PBXBuildFile; fileRef = 40E09C891DC2F99B0040C25D /* designs.md */; };
 		40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5C3201D8496B4004FC0EC /* Levels.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		40E09C831DC1AA020040C25D /* CPUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPUViewController.swift; sourceTree = "<group>"; };
 		40E09C871DC1AED60040C25D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		40E09C891DC2F99B0040C25D /* designs.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = designs.md; sourceTree = "<group>"; };
 		40E5C3201D8496B4004FC0EC /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				40E09C831DC1AA020040C25D /* CPUViewController.swift */,
 				16187A8C1D7915B1007869BA /* InstructionBlockController.swift */,
 				401980511D8250C100C134DB /* Enums.swift */,
+				40E09C891DC2F99B0040C25D /* designs.md */,
 				40E5C3201D8496B4004FC0EC /* Levels.swift */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
 			);
@@ -162,6 +165,7 @@
 			files = (
 				40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */,
 				40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */,
+				40E09C8A1DC2F99B0040C25D /* designs.md in Resources */,
 				40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
