@@ -115,7 +115,7 @@ class CPUViewController: UIViewController {
             return
         case let .LoadImmediate  (rg, val):
             createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val))
-            targetView = registerBlockView.getRegView(regNum: rg - 1)
+            targetView = registerBlockView.getRegView(regNum: rg)
             
             targetView!.layer.borderColor = UIColor.blueColor().CGColor
             targetView!.layer.borderWidth = 5
