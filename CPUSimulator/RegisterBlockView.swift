@@ -55,21 +55,21 @@ class RegisterBlockView: UIView {
             }
             
             registers[index].frame = regFrame
-            registers[index].labelValue = "Register " + String(index)
+            registers[index].label = "Register " + String(index)
             setRegValue(regNum: index, regValue: 0)
         }
 
     }
     
     internal func setRegValue(regNum n: Int, regValue v: Int){
-        registers[n].regValue = String(v)
+        registers[n].value = String(v)
     }
 
     internal func getRegValue(regNum n: Int, regValue v: Int) -> String {
-        return registers[n].regValue
+        return registers[n].label
     }
     
-    internal func getRegView(regNum n: Int) -> UIView {
+    internal func getRegView(regNum n: Int) -> UIViewWrapper {
         return registers[n]
     }
 }

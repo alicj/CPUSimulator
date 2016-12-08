@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterView: UIView {
+class RegisterView: UIViewWrapper {
     
     internal let labelHeight = 24
     internal let labelWidth = 124
@@ -22,48 +22,47 @@ class RegisterView: UIView {
         return self.labelWidth
     }()
     
-    private let label = UILabel()
-    private let value = UILabel()
+    private let regLabel = UILabel()
+    private let regValue = UILabel()
     
-    internal var labelValue: String {
+    internal var label: String {
         get {
-            return label.text!
+            return regLabel.text!
         }
         set {
-            label.text = newValue
+            regLabel.text = newValue
         }
     }
     
-    internal var regValue: String {
+    override var value: String {
         get {
-            return value.text!
+            return regValue.text!
         }
         set {
-            value.text = newValue
+            regValue.text = newValue
         }
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        label.frame = (frame: CGRect(x: 0, y:0, width: labelWidth, height: labelHeight))
-        value.frame = (frame: CGRect(x: 0, y:labelHeight, width: valueWidth, height: valueHeight))
+        regLabel.frame = (frame: CGRect(x: 0, y:0, width: labelWidth, height: labelHeight))
+        regValue.frame = (frame: CGRect(x: 0, y:labelHeight, width: valueWidth, height: valueHeight))
         
-        label.text = "Register 0"
-        value.text = "0"
+        regLabel.text = "Register 0"
+        regValue.text = "0"
         
-        label.font = label.font.fontWithSize(20)
-        value.font = value.font.fontWithSize(25)
+        regLabel.font = regLabel.font.fontWithSize(20)
+        regValue.font = regValue.font.fontWithSize(25)
         
-        label.textAlignment = NSTextAlignment.Center
-        value.textAlignment = NSTextAlignment.Center
+        regLabel.textAlignment = NSTextAlignment.Center
+        regValue.textAlignment = NSTextAlignment.Center
         
-        label.layer.borderWidth = 1
-        value.layer.borderWidth = 1
+        regLabel.layer.borderWidth = 1
+        regValue.layer.borderWidth = 1
         
-        self.addSubview(label)
-        self.addSubview(value)
+        self.addSubview(regLabel)
+        self.addSubview(regValue)
         
     }
     

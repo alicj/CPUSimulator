@@ -8,12 +8,12 @@
 
 import UIKit
 
-class DraggableView: UIView {
+class DraggableView: UIViewWrapper {
     
     internal var lastLocation: CGPoint = CGPointZero
     private var label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     
-    internal var labelText: String {
+    override var value: String {
         get {
             return label.text!
         }
@@ -21,7 +21,7 @@ class DraggableView: UIView {
             label.text = newValue
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
