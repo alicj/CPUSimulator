@@ -30,7 +30,7 @@ internal enum Order {
 internal enum State {
     case Null
     case WaitForDrag
-    case ValidateDrag
+    case SuccessDrag
 }
 
 

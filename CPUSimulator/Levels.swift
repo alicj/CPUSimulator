@@ -11,17 +11,26 @@ import Foundation
 let LEVELS = [
     [
         Instruction.LoadImmediate(1, 1),
-        Instruction.Add(2, 1, 1),
+        Instruction.LoadImmediate(2, 5),
+        Instruction.LoadImmediate(3, 4),
+        Instruction.LoadImmediate(4, 1),
+        Instruction.LoadImmediate(5, 6),
         Instruction.Halt
     ],
     [
-        Instruction.LoadImmediate(1, 2),
-        Instruction.Add(3, 1, 1),
+        Instruction.LoadImmediate(5, 1),
+        Instruction.LoadImmediate(7, 5),
+        Instruction.LoadImmediate(2, 4),
+        Instruction.LoadImmediate(1, 1),
+        Instruction.LoadImmediate(6, 6),
         Instruction.Halt
     ],
     [
-        Instruction.LoadImmediate(1, 5),
-        Instruction.Add(4, 1, 1),
+        Instruction.LoadImmediate(5, 1),
+        Instruction.LoadImmediate(2, 5),
+        Instruction.LoadImmediate(7, 4),
+        Instruction.LoadImmediate(6, 1),
+        Instruction.LoadImmediate(3, 6),
         Instruction.Halt
     ]
 ]

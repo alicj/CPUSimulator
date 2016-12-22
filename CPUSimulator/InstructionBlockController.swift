@@ -27,11 +27,6 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         instructionBlockView.layer.borderWidth = 2
         instructionBlockView.layer.borderColor = UIColor.redColor().CGColor
         super.view.addSubview(instructionBlockView)
-        
-        nextLevelButton.backgroundColor = .blackColor()
-        nextLevelButton.setTitle("Next Instr", forState: .Normal)
-        nextLevelButton.addTarget(self, action: #selector(nextStage), forControlEvents: .TouchUpInside)
-        super.view.addSubview(nextLevelButton)
     }
     
     override func didReceiveMemoryWarning() {

@@ -10,8 +10,10 @@ import UIKit
 
 class DraggableView: UIViewWrapper {
     
+    static let SIZE:CGSize = CGSize(width: 100, height: 100)
     internal var lastLocation: CGPoint = CGPointZero
-    private var label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    lazy private var label: UILabel = UILabel(frame: CGRect(origin: CGPointZero, size: DraggableView.SIZE))
+
     
     override var value: String {
         get {
