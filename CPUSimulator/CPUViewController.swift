@@ -16,24 +16,42 @@ class CPUViewController: UIViewController {
     // variables for draggables
     private var selectedView:UIViewWrapper?
     private var dragOrigin = CGPoint()
+    private var draggableCount = 0 // may not be useful
     
-    private var targetView: UIViewWrapper?
+    //    private var targetView: UIViewWrapper?
+    private var currentTargets: [UIViewWrapper] = []
+    private var pendingTargets: [UIViewWrapper] = []
+    
     
     private var gameState: State = State.Null {
         willSet{
-            print("=== will set `state` to \(newValue)")
+            //            print("=== will set `state` to \(newValue)")
         }
         didSet{
-            print("=== did set `state`")
-            if gameState == State.SuccessDrag {
+            //            print("=== did set `state`")
+            switch gameState {
+            case State.GameStart:
+                processInstruction()
+                return
+                
+            case State.SuccessDragRegister:
                 nextLevel()
+                return
+                
+            case State.SuccessDragCalc:
+                processCalculation()
+                processInstruction()
+                return
+                
+            default:
+                return
             }
         }
     }
     
     // views and controllers
-    private var registerBlockView = RegisterBlockView(frame: CGRect(x: 450, y: 700, width: 560, height: 240))
-    private var aluView = ALUView(frame: CGRect(x: 450, y: (700 + 240), width: 560, height: 240))
+    private var registerBlockView = RegisterBlockView(frame: CGRect(x: 450, y: 600, width: 560, height: 240))
+    private var aluView = ALUView(frame: CGRect(x: 450, y: (600 + 240), width: 560, height: 360))
     private var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
     private var instructionBlockController = InstructionBlockController()
     
@@ -48,7 +66,12 @@ class CPUViewController: UIViewController {
         
         setupGestures()
         
-        processInstruction()
+        gameState = State.GameStart
+        
+        //debug
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CPUViewController.showMoreActions(_:)))
+        tap.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,6 +92,15 @@ class CPUViewController: UIViewController {
         self.view.addGestureRecognizer(gesture)
     }
     
+    //debug
+    func showMoreActions(touch: UITapGestureRecognizer) {
+        
+        let touchPoint = touch.locationInView(self.view)
+        print (touchPoint)
+        
+    }
+    
+    
     @objc private func pan(rec:UIPanGestureRecognizer) {
         let p:CGPoint = rec.locationInView(self.view)
         
@@ -77,7 +109,6 @@ class CPUViewController: UIViewController {
             selectedView = self.view.hitTest(p, withEvent: nil) as? UIViewWrapper
             
             if let subview = selectedView as? DraggableView {
-                print("selected")
                 self.view.bringSubviewToFront(subview)
                 dragOrigin = subview.lastLocation
             }
@@ -89,13 +120,56 @@ class CPUViewController: UIViewController {
         case .Ended:
             if let subview = selectedView as? DraggableView {
                 // start validating drag result
-                if subview.frame.intersects(self.view.convertRect(targetView!.frame, fromView: targetView!.superview)) {
-                    if gameState == State.WaitForDrag {
-                        subview.removeFromSuperview()
-                        targetView!.value = subview.value
-                        gameState = State.SuccessDrag
+                var hit = false
+                
+                for (i, targetView) in currentTargets.enumerate() {
+                    
+                    let targetRect = self.view.convertRect(targetView.frame, fromView: targetView.superview)
+                    print("target frame: \(targetRect)")
+                    print("subview frame: \(subview.frame)")
+                    
+                    if subview.frame.intersects(targetRect) {
+                        switch gameState {
+                            
+                        case .WaitForDragResult,
+                             .WaitForDragRegister:
+                            hit = true
+                            subview.removeFromSuperview()
+                            targetView.value = subview.value
+                            gameState = State.SuccessDragRegister
+                            return
+                            
+                        case .WaitForDragCalc:
+                            if targetView is OperandView {
+                                if subview.property == "Operand" {
+                                    hit = true
+                                    subview.removeFromSuperview()
+                                    targetView.value = subview.value
+                                    currentTargets.removeAtIndex(i)
+                                }
+                            }else {
+                                if subview.property == "Operator" {
+                                    hit = true
+                                    subview.removeFromSuperview()
+                                    targetView.value = subview.value
+                                    currentTargets.removeAtIndex(i)
+                                    
+                                }
+                            }
+                            
+                            if currentTargets.count == 0 {
+                                gameState = State.SuccessDragCalc
+                            }
+                            return
+                            
+                        default:
+                            return
+                        }
+                        
                     }
-                }else{
+                }
+                
+                if !hit {
                     subview.center = dragOrigin
                 }
                 
@@ -111,39 +185,81 @@ class CPUViewController: UIViewController {
         print(instr)
         
         switch instr {
-        case let .Load           (rg1, rg2, rg3):
-            return
-        case let .Store          (rg1, rg2, rg3):
-            return
-        case let .LoadImmediate  (rg, val):
-            createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val))
-            targetView = registerBlockView.getRegView(regNum: rg)
-            targetView!.layer.borderColor = UIColor.blueColor().CGColor
-            targetView!.layer.borderWidth = 5
             
-            self.view.bringSubviewToFront(targetView!)
-            gameState = State.WaitForDrag
+        case let .LoadImmediate  (rg, val):
+            createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val), property: "Register")
+            draggableCount = 1;
+            currentTargets.append(registerBlockView.getRegView(regNum: rg))
+            
+            //            self.view.bringSubviewToFront(targetView!)
+            gameState = State.WaitForDragRegister
             return
+            
         case let .Add            (rg1, rg2, rg3):
+            if gameState != State.SuccessDragCalc {
+                let operand1 = registerBlockView.getRegView(regNum: rg2)
+                let operand2 = registerBlockView.getRegView(regNum: rg3)
+                
+                createDraggable(convertRect(operand1).origin, value: operand1.value, property: "Operand")
+                createDraggable(convertRect(operand2).origin, value: operand2.value, property: "Operand")
+                createDraggable(CGPoint(x: 600, y:1100), value: "+", property: "Operator")
+                
+                currentTargets.append(aluView.getOperandView(0))
+                currentTargets.append(aluView.getOperandView(1))
+                currentTargets.append(aluView.getOperatorView())
+                pendingTargets.append(registerBlockView.getRegView(regNum: rg1))
+                
+                gameState = State.WaitForDragCalc
+                
+            }else{
+                let resultView = aluView.getResultView()
+                createDraggable(convertRect(resultView).origin, value: resultView.value, property: "Register")
+                
+                currentTargets.append(registerBlockView.getRegView(regNum: rg1))
+                gameState = State.WaitForDragResult
+            }
             return
-        case let .Multiply       (rg1, rg2, rg3):
-            return
-        case let .And            (rg1, rg2, rg3):
-            return
-        case let .Or             (rg1, rg2, rg3):
-            return
-        case let .Not            (rg1, rg2, rg3):
-            return
-        case let .Rotate         (rg1, rg2, val):
-            return
-        case let .Compare        (rg1, rg2):
-            return
-        case let .Branch         (_, rg1): //FIXME
-            return
+            
+            //        case let .Multiply       (rg1, rg2, rg3):
+            //            return
+            //        case let .And            (rg1, rg2, rg3):
+            //            return
+            //        case let .Or             (rg1, rg2, rg3):
+            //            return
+            //        case let .Not            (rg1, rg2, rg3):
+            //            return
+            //
+            //        case let .Load           (rg1, rg2, rg3):
+            //            return
+            //        case let .Store          (rg1, rg2, rg3):
+            //            return
+            //        case let .Rotate         (rg1, rg2, val):
+            //            return
+            //        case let .Compare        (rg1, rg2):
+            //            return
+            //        case let .Branch         (_, rg1): //FIXME
+        //            return
         case .Halt:
             nextLevel()
             return
+            
+        default:
+            return
         }
+        
+    }
+    
+    func processCalculation() {
+        let resultView = aluView.getResultView()
+        
+        switch aluView.getOperatorView().value {
+        case "+":
+            resultView.value = String(Int(aluView.getOperandView(0).value)! + Int(aluView.getOperandView(1).value)!)
+        default:
+            return
+        }
+        
+        
         
     }
     
@@ -151,11 +267,14 @@ class CPUViewController: UIViewController {
         
     }
     
-    private func createDraggable(origin: CGPoint, value: String) {
+    private func createDraggable(origin: CGPoint, value: String, property: String) {
         let draggable = DraggableView(frame: CGRect(origin: origin, size: DraggableView.SIZE))
-        draggable.value = value;
+        draggable.value = value
+        draggable.property = property
         self.view.addSubview(draggable)
+        draggableCount += 1
     }
+    
     
     private func nextLevel() {
         cleanViews()
@@ -164,12 +283,13 @@ class CPUViewController: UIViewController {
     }
     
     private func cleanViews() {
-        if targetView != nil {
-            targetView!.layer.borderColor = UIColor.blackColor().CGColor
-            targetView!.layer.borderWidth = 1
-        }
-        targetView = nil
+        currentTargets = []
+        pendingTargets = []
         selectedView = nil
+        draggableCount = 0
     }
     
+    private func convertRect(view : UIView) -> CGRect {
+        return self.view.convertRect(view.frame, fromView: view.superview)
+    }
 }

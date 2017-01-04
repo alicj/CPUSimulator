@@ -19,6 +19,8 @@
 		40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA21D57CC58008025B2 /* Assets.xcassets */; };
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
 		405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */; };
+		4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40B1E0CD6D300D61FF6 /* OperandView.swift */; };
+		4066D40E1E0CD70400D61FF6 /* OperatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40D1E0CD70400D61FF6 /* OperatorView.swift */; };
 		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
 		40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C831DC1AA020040C25D /* CPUViewController.swift */; };
 		40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C871DC1AED60040C25D /* RegisterView.swift */; };
@@ -41,6 +43,8 @@
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockView.swift; sourceTree = "<group>"; };
+		4066D40B1E0CD6D300D61FF6 /* OperandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperandView.swift; sourceTree = "<group>"; };
+		4066D40D1E0CD70400D61FF6 /* OperatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorView.swift; sourceTree = "<group>"; };
 		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		40E09C831DC1AA020040C25D /* CPUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPUViewController.swift; sourceTree = "<group>"; };
 		40E09C871DC1AED60040C25D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				16187A801D737733007869BA /* RegisterBlockView.swift */,
 				40E09C871DC1AED60040C25D /* RegisterView.swift */,
 				16187A821D739D51007869BA /* ALUView.swift */,
+				4066D40B1E0CD6D300D61FF6 /* OperandView.swift */,
+				4066D40D1E0CD70400D61FF6 /* OperatorView.swift */,
 				16187A881D751D72007869BA /* MemoryBlockView.swift */,
 				4075222B1DC048DB00365D78 /* DraggableView.swift */,
 				401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */,
@@ -190,6 +196,8 @@
 				401980521D8250C100C134DB /* Enums.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
 				405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */,
+				4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */,
+				4066D40E1E0CD70400D61FF6 /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 				40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */,
 				16187A831D739D51007869BA /* ALUView.swift in Sources */,

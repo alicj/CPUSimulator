@@ -10,8 +10,8 @@ import Foundation
 
 let LEVELS = [
     [
-        Instruction.LoadImmediate(1, 1),
         Instruction.LoadImmediate(2, 5),
+        Instruction.Add(1, 2, 3),
         Instruction.LoadImmediate(3, 4),
         Instruction.LoadImmediate(4, 1),
         Instruction.LoadImmediate(5, 6),

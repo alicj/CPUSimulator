@@ -28,9 +28,22 @@ internal enum Order {
 }
 
 internal enum State {
+    // universal
     case Null
-    case WaitForDrag
+    case GameStart
+    // not used
     case SuccessDrag
+    case WaitForDrag
+    // loadimmediate
+    case WaitForDragRegister
+    case SuccessDragRegister
+    // add, multiply, and, or, not
+    case WaitForDragCalc
+    case SuccessDragCalc
+    case WaitForDragOperand1
+    case WaitForDragOperand2
+    case WaitForDragOperator
+    case WaitForDragResult
 }
 
 

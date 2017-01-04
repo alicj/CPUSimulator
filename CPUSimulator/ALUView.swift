@@ -45,15 +45,39 @@ class ALUView: UIView {
     var aluRegistersArray = [UILabel]()
     var aluButtonsArray = [UIButton]()
     
+    
+    
+    var operandArray = [OperandView]()
+    var operatorView = OperatorView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         // add the buttons to view & ?
-        initButtons()
+//        initButtons()
         // add the registers
-        initRegister()
+//        initRegister()
         // initialize the offsets for buttons and labels
-        initOffset()
+//        initOffset()
+        
+        
+        let left = OperandView(frame: CGRect(x: 190, y: 20, width: OperandView.width, height: OperandView.height))
+        
+        let right = OperandView(frame: CGRect(x: 290, y: 20, width: OperandView.width, height: OperandView.height))
+        
+        operatorView = OperatorView(frame: CGRect(x: 250, y: 110, width: OperatorView.width, height: OperatorView.height))
+        
+        let bottom = OperandView(frame: CGRect(x: 240, y: 180, width: OperandView.width, height: OperandView.height))
+        
+        operandArray.append(left)
+        operandArray.append(right)
+        operandArray.append(bottom)
+
+        addSubview(left)
+        addSubview(right)
+        addSubview(operatorView)
+        addSubview(bottom)
+        
         
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.redColor().CGColor
@@ -63,10 +87,23 @@ class ALUView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func getOperandView (index: Int) -> OperandView {
+        return operandArray[index]
+    }
+    
+    func getResultView () -> OperandView {
+        return operandArray.last!
+    }
+
+    func getOperatorView () -> OperatorView {
+        return operatorView
+    }
+
+    
     // update the alu button features
     override func layoutSubviews() {
-        moveButtons()
-        moveLabels()
+//        moveButtons()
+//        moveLabels()
     }
     
     func initOffset(){

@@ -49,9 +49,6 @@ class RegisterView: UIViewWrapper {
         regLabel.frame = (frame: CGRect(x: 0, y:0, width: labelWidth, height: labelHeight))
         regValue.frame = (frame: CGRect(x: 0, y:labelHeight, width: valueWidth, height: valueHeight))
         
-        regLabel.text = "Register 0"
-        regValue.text = "0"
-        
         regLabel.font = regLabel.font.fontWithSize(20)
         regValue.font = regValue.font.fontWithSize(25)
         
