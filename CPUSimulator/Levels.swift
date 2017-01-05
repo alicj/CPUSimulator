@@ -11,10 +11,13 @@ import Foundation
 let LEVELS = [
     [
         Instruction.LoadImmediate(2, 5),
+        Instruction.LoadImmediate(3, 2),
         Instruction.Add(1, 2, 3),
-        Instruction.LoadImmediate(3, 4),
-        Instruction.LoadImmediate(4, 1),
-        Instruction.LoadImmediate(5, 6),
+        Instruction.And(0, 1, 2),
+        Instruction.Or(3, 0, 1),
+        Instruction.Multiply(1, 0, 3),
+        Instruction.Not(1, 1),
+        Instruction.Rotate(5, 1, 3),
         Instruction.Halt
     ],
     [

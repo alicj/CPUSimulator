@@ -63,8 +63,8 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
             return processInstruction(col, name: "And", values: [rg1, rg2, rg3])
         case let .Or             (rg1, rg2, rg3):
             return processInstruction(col, name: "Or", values: [rg1, rg2, rg3])
-        case let .Not            (rg1, rg2, rg3):
-            return processInstruction(col, name: "Not", values: [rg1, rg2, rg3])
+        case let .Not            (rg1, rg2):
+            return processInstruction(col, name: "Not", values: [rg1, rg2])
         case let .Rotate         (rg1, rg2, val):
             return processInstruction(col, name: "Rotate", values: [rg1, rg2, val])
         case let .Compare        (rg1, rg2):

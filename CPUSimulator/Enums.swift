@@ -16,7 +16,7 @@ internal enum Instruction {
     case Multiply       (RegisterNumber, RegisterNumber, RegisterNumber)
     case And            (RegisterNumber, RegisterNumber, RegisterNumber)
     case Or             (RegisterNumber, RegisterNumber, RegisterNumber)
-    case Not            (RegisterNumber, RegisterNumber, RegisterNumber)
+    case Not            (RegisterNumber, RegisterNumber)
     case Rotate         (RegisterNumber, RegisterNumber, Int)
     case Compare        (RegisterNumber, RegisterNumber)
     case Branch         ([Order], RegisterNumber)

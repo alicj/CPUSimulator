@@ -62,8 +62,10 @@ class ALUView: UIView {
         
         
         let left = OperandView(frame: CGRect(x: 190, y: 20, width: OperandView.width, height: OperandView.height))
+        left.order = "Operand1"
         
         let right = OperandView(frame: CGRect(x: 290, y: 20, width: OperandView.width, height: OperandView.height))
+        right.order = "Operand2"
         
         operatorView = OperatorView(frame: CGRect(x: 250, y: 110, width: OperatorView.width, height: OperatorView.height))
         
