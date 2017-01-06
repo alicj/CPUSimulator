@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16187A811D737733007869BA /* RegisterBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A801D737733007869BA /* RegisterBlockView.swift */; };
-		16187A831D739D51007869BA /* ALUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A821D739D51007869BA /* ALUView.swift */; };
+		16187A831D739D51007869BA /* ALUBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A821D739D51007869BA /* ALUBlockView.swift */; };
 		16187A891D751D72007869BA /* MemoryBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A881D751D72007869BA /* MemoryBlockView.swift */; };
 		16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A8C1D7915B1007869BA /* InstructionBlockController.swift */; };
 		401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */; };
@@ -26,11 +26,12 @@
 		40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C871DC1AED60040C25D /* RegisterView.swift */; };
 		40E09C8A1DC2F99B0040C25D /* designs.md in Resources */ = {isa = PBXBuildFile; fileRef = 40E09C891DC2F99B0040C25D /* designs.md */; };
 		40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5C3201D8496B4004FC0EC /* Levels.swift */; };
+		40F0C40B1E1F57C500DC2526 /* todos.md in Sources */ = {isa = PBXBuildFile; fileRef = 40F0C40A1E1F57C500DC2526 /* todos.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		16187A801D737733007869BA /* RegisterBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterBlockView.swift; sourceTree = "<group>"; };
-		16187A821D739D51007869BA /* ALUView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALUView.swift; sourceTree = "<group>"; };
+		16187A821D739D51007869BA /* ALUBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALUBlockView.swift; sourceTree = "<group>"; };
 		16187A881D751D72007869BA /* MemoryBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBlockView.swift; sourceTree = "<group>"; };
 		16187A8C1D7915B1007869BA /* InstructionBlockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockController.swift; sourceTree = "<group>"; };
 		401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewWrapper.swift; sourceTree = "<group>"; };
@@ -50,6 +51,7 @@
 		40E09C871DC1AED60040C25D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		40E09C891DC2F99B0040C25D /* designs.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = designs.md; sourceTree = "<group>"; };
 		40E5C3201D8496B4004FC0EC /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		40F0C40A1E1F57C500DC2526 /* todos.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = todos.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,20 +85,14 @@
 			isa = PBXGroup;
 			children = (
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
-				405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */,
-				16187A801D737733007869BA /* RegisterBlockView.swift */,
-				40E09C871DC1AED60040C25D /* RegisterView.swift */,
-				16187A821D739D51007869BA /* ALUView.swift */,
-				4066D40B1E0CD6D300D61FF6 /* OperandView.swift */,
-				4066D40D1E0CD70400D61FF6 /* OperatorView.swift */,
-				16187A881D751D72007869BA /* MemoryBlockView.swift */,
-				4075222B1DC048DB00365D78 /* DraggableView.swift */,
-				401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */,
+				40F0C4091E1F440E00DC2526 /* Common */,
+				40F0C4071E1F437C00DC2526 /* ALUBlock */,
+				40F0C4061E1F436F00DC2526 /* RegisterBlock */,
+				40F0C4051E1F435200DC2526 /* InstructionBlock */,
+				40F0C4081E1F43A300DC2526 /* MemoryBlock */,
 				40E09C831DC1AA020040C25D /* CPUViewController.swift */,
-				16187A8C1D7915B1007869BA /* InstructionBlockController.swift */,
-				401980511D8250C100C134DB /* Enums.swift */,
-				40E5C3201D8496B4004FC0EC /* Levels.swift */,
 				40E09C891DC2F99B0040C25D /* designs.md */,
+				40F0C40A1E1F57C500DC2526 /* todos.md */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
 			);
 			path = CPUSimulator;
@@ -112,6 +108,53 @@
 				40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40F0C4051E1F435200DC2526 /* InstructionBlock */ = {
+			isa = PBXGroup;
+			children = (
+				16187A8C1D7915B1007869BA /* InstructionBlockController.swift */,
+				405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */,
+			);
+			name = InstructionBlock;
+			sourceTree = "<group>";
+		};
+		40F0C4061E1F436F00DC2526 /* RegisterBlock */ = {
+			isa = PBXGroup;
+			children = (
+				16187A801D737733007869BA /* RegisterBlockView.swift */,
+				40E09C871DC1AED60040C25D /* RegisterView.swift */,
+			);
+			name = RegisterBlock;
+			sourceTree = "<group>";
+		};
+		40F0C4071E1F437C00DC2526 /* ALUBlock */ = {
+			isa = PBXGroup;
+			children = (
+				16187A821D739D51007869BA /* ALUBlockView.swift */,
+				4066D40B1E0CD6D300D61FF6 /* OperandView.swift */,
+				4066D40D1E0CD70400D61FF6 /* OperatorView.swift */,
+			);
+			name = ALUBlock;
+			sourceTree = "<group>";
+		};
+		40F0C4081E1F43A300DC2526 /* MemoryBlock */ = {
+			isa = PBXGroup;
+			children = (
+				16187A881D751D72007869BA /* MemoryBlockView.swift */,
+			);
+			name = MemoryBlock;
+			sourceTree = "<group>";
+		};
+		40F0C4091E1F440E00DC2526 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4075222B1DC048DB00365D78 /* DraggableView.swift */,
+				401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */,
+				401980511D8250C100C134DB /* Enums.swift */,
+				40E5C3201D8496B4004FC0EC /* Levels.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40F0C40B1E1F57C500DC2526 /* todos.md in Sources */,
 				401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */,
 				4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */,
 				40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */,
@@ -200,7 +244,7 @@
 				4066D40E1E0CD70400D61FF6 /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 				40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */,
-				16187A831D739D51007869BA /* ALUView.swift in Sources */,
+				16187A831D739D51007869BA /* ALUBlockView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

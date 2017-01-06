@@ -50,7 +50,7 @@ class CPUViewController: UIViewController {
     
     // views and controllers
     private var registerBlockView = RegisterBlockView(frame: CGRect(x: 450, y: 600, width: 560, height: 240))
-    private var aluView = ALUView(frame: CGRect(x: 450, y: (600 + 240), width: 560, height: 360))
+    private var aluBlockView = ALUBlockView(frame: CGRect(x: 450, y: (600 + 240), width: 560, height: 360))
     private var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
     private var instructionBlockController = InstructionBlockController()
     
@@ -60,7 +60,7 @@ class CPUViewController: UIViewController {
         addInstructionViewController()
         
         self.view.addSubview(registerBlockView)
-        self.view.addSubview(aluView)
+        self.view.addSubview(aluBlockView)
         self.view.addSubview(memoryBlockView)
         
         setupGestures()
@@ -183,7 +183,6 @@ class CPUViewController: UIViewController {
         case let .LoadImmediate  (rg, val):
             createDraggable(INSTR_DRAGGABLE_ORIGIN, value: String(val), property: "Register")
             currentTargets.append(registerBlockView.getRegView(regNum: rg))
-            
             gameState = State.WaitForDragRegister
             
         case let .Add            (rg1, rg2, rg3):
@@ -228,21 +227,21 @@ class CPUViewController: UIViewController {
             createDraggable(convertRect(operand1).origin, value: operand1.value, property: "Operand1")
             createDraggable(CGPoint(x: 600, y:1100), value: operation, property: "Operator")
             
-            currentTargets.append(aluView.getOperandView(0))
-            currentTargets.append(aluView.getOperatorView())
+            currentTargets.append(aluBlockView.getOperandView(0))
+            currentTargets.append(aluBlockView.getOperatorView())
             
             pendingTargets.append(registerBlockView.getRegView(regNum: values[0]))
             
             if values.count > 2 {
                 let operand2 = registerBlockView.getRegView(regNum: values[2])
                 createDraggable(convertRect(operand2).origin, value: operand2.value, property: "Operand2")
-                currentTargets.append(aluView.getOperandView(1))
+                currentTargets.append(aluBlockView.getOperandView(1))
             }
             
             gameState = State.WaitForDragCalc
             
         }else{
-            let resultView = aluView.getResultView()
+            let resultView = aluBlockView.getResultView()
             createDraggable(convertRect(resultView).origin, value: resultView.value, property: "Register")
             
             currentTargets.append(registerBlockView.getRegView(regNum: values[0]))
@@ -251,14 +250,14 @@ class CPUViewController: UIViewController {
     }
     
     func processCalculation() {
-        let resultView = aluView.getResultView()
-        let op = aluView.getOperatorView().value
+        let resultView = aluBlockView.getResultView()
+        let op = aluBlockView.getOperatorView().value
 
-        let op1 = UInt8(aluView.getOperandView(0).value)!
+        let op1 = UInt8(aluBlockView.getOperandView(0).value)!
         var op2 = UInt8()
         
-        if !aluView.getOperandView(1).value.isEmpty {
-            op2 = UInt8(aluView.getOperandView(1).value)!
+        if !aluBlockView.getOperandView(1).value.isEmpty {
+            op2 = UInt8(aluBlockView.getOperandView(1).value)!
         }
         
         
@@ -299,21 +298,17 @@ class CPUViewController: UIViewController {
         processInstruction()
     }
     
-    private func cleanVariables() {
-        currentTargets = []
-        pendingTargets = []
-        selectedView = nil
-    }
-    
     private func cleanALUViews() {
-        aluView.getResultView().value = ""
-        aluView.getOperandView(0).value = ""
-        aluView.getOperandView(1).value = ""
-        aluView.getOperatorView().value = ""
+        aluBlockView.getResultView().value = ""
+        aluBlockView.getOperandView(0).value = ""
+        aluBlockView.getOperandView(1).value = ""
+        aluBlockView.getOperatorView().value = ""
     }
     
     private func cleanUp() {
-        cleanVariables()
+        currentTargets = []
+        pendingTargets = []
+        selectedView = nil
     }
     
     

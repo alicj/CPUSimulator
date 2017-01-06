@@ -10,8 +10,14 @@ import UIKit
 
 class UIViewWrapper: UIView {
     
-    var value: String = ""
-    
+    var value: String {
+        get {
+            return self.value
+        }
+        set {
+            self.value = newValue
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
  

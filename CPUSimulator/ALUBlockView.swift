@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ALUView: UIView {
+class ALUBlockView: UIView {
 
     let aluRegisterWidth = 90
     let aluRegisterHeight = 50
