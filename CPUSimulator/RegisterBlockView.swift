@@ -10,9 +10,9 @@ import UIKit
 
 class RegisterBlockView: UIView {
         
-    private let margin = 16
-    private var regWidth: Int
-    private var regHeight: Int
+    fileprivate let margin = 16
+    fileprivate var regWidth: Int
+    fileprivate var regHeight: Int
 
     internal var registers = [RegisterView]()
     
@@ -25,7 +25,7 @@ class RegisterBlockView: UIView {
         positionViews()
         
         self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.redColor().CGColor
+        self.layer.borderColor = UIColor.red.cgColor
         
     }
     
@@ -33,7 +33,7 @@ class RegisterBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initRegisters() {
+    fileprivate func initRegisters() {
         for _ in 0..<8 {
             let register = RegisterView()
             registers += [register]
@@ -41,7 +41,7 @@ class RegisterBlockView: UIView {
         }
     }
     
-    private func positionViews() {
+    fileprivate func positionViews() {
         var regFrame = CGRect(x: 0, y:0, width: regWidth, height: regHeight)
         
         for index in 0..<registers.count {

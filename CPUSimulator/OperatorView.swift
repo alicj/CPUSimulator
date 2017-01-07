@@ -14,7 +14,7 @@ class OperatorView: UIViewWrapper {
     static let width = 60
     
     
-    private let opValue = UILabel()
+    fileprivate let opValue = UILabel()
     
     override internal var value: String {
         get {
@@ -30,8 +30,8 @@ class OperatorView: UIViewWrapper {
         
         opValue.frame = (frame: CGRect(x: 0, y:0, width: OperatorView.width, height: OperatorView.height))
         
-        opValue.font = opValue.font.fontWithSize(20)
-        opValue.textAlignment = NSTextAlignment.Center
+        opValue.font = opValue.font.withSize(20)
+        opValue.textAlignment = NSTextAlignment.center
         opValue.layer.borderWidth = 1
         
         self.addSubview(opValue)

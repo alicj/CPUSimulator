@@ -11,8 +11,8 @@ import UIKit
 class DraggableView: UIViewWrapper {
     
     static let SIZE:CGSize = CGSize(width: 50, height: 50)
-    internal var lastLocation: CGPoint = CGPointZero
-    lazy private var label: UILabel = UILabel(frame: CGRect(origin: CGPointZero, size: DraggableView.SIZE))
+    internal var lastLocation: CGPoint = CGPoint.zero
+    lazy fileprivate var label: UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: DraggableView.SIZE))
     lazy var property = String() // maybe should change this to `destination` to better suit its purpose
 
 
@@ -31,10 +31,10 @@ class DraggableView: UIViewWrapper {
         super.init(frame: frame)
         
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.blueColor().CGColor
+        self.layer.borderColor = UIColor.blue.cgColor
         
-        label.textColor = UIColor.blueColor()
-        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.blue
+        label.textAlignment = NSTextAlignment.center
         lastLocation = self.center
 
         self.addSubview(label)

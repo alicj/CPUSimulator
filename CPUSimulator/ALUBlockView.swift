@@ -82,14 +82,14 @@ class ALUBlockView: UIView {
         
         
         self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.redColor().CGColor
+        self.layer.borderColor = UIColor.red.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getOperandView (index: Int) -> OperandView {
+    func getOperandView (_ index: Int) -> OperandView {
         return operandArray[index]
     }
     
@@ -132,7 +132,7 @@ class ALUBlockView: UIView {
     func initRegister(){
         for _ in 0..<3 {
             let label = UILabel()
-            label.textAlignment = NSTextAlignment.Center
+            label.textAlignment = NSTextAlignment.center
             aluRegistersArray += [label]
             addSubview(label)
         }
@@ -153,8 +153,8 @@ class ALUBlockView: UIView {
                 buttonFrame.origin.y = CGFloat(questionMarkYOffset)
             }
             aluButtonsArray[index].frame = buttonFrame
-            aluButtonsArray[index].setTitle(aluButtons[index], forState: UIControlState.Normal)
-            aluButtonsArray[index].backgroundColor = UIColor.redColor()
+            aluButtonsArray[index].setTitle(aluButtons[index], for: UIControlState())
+            aluButtonsArray[index].backgroundColor = UIColor.red
         }
     }
     

@@ -22,8 +22,8 @@ class RegisterView: UIViewWrapper {
         return self.labelWidth
     }()
     
-    private let regLabel = UILabel()
-    private let regValue = UILabel()
+    fileprivate let regLabel = UILabel()
+    fileprivate let regValue = UILabel()
     
     internal var label: String {
         get {
@@ -49,11 +49,11 @@ class RegisterView: UIViewWrapper {
         regLabel.frame = (frame: CGRect(x: 0, y:0, width: labelWidth, height: labelHeight))
         regValue.frame = (frame: CGRect(x: 0, y:labelHeight, width: valueWidth, height: valueHeight))
         
-        regLabel.font = regLabel.font.fontWithSize(20)
-        regValue.font = regValue.font.fontWithSize(25)
+        regLabel.font = regLabel.font.withSize(20)
+        regValue.font = regValue.font.withSize(25)
         
-        regLabel.textAlignment = NSTextAlignment.Center
-        regValue.textAlignment = NSTextAlignment.Center
+        regLabel.textAlignment = NSTextAlignment.center
+        regValue.textAlignment = NSTextAlignment.center
         
         regLabel.layer.borderWidth = 1
         regValue.layer.borderWidth = 1

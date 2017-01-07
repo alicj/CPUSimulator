@@ -22,7 +22,7 @@ class InstructionBlockView: UIPickerView {
             )
         )
         instructions.layer.borderWidth = 2
-        instructions.layer.borderColor = UIColor.redColor().CGColor
+        instructions.layer.borderColor = UIColor.red.cgColor
         self.addSubview(instructions)
         
     }

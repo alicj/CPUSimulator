@@ -9,41 +9,41 @@
 import Foundation
 
 internal enum Instruction {
-    case Load           (RegisterNumber, RegisterNumber, RegisterNumber)
-    case Store          (RegisterNumber, RegisterNumber, RegisterNumber)
-    case LoadImmediate  (RegisterNumber, RegisterValue)
-    case Add            (RegisterNumber, RegisterNumber, RegisterNumber)
-    case Multiply       (RegisterNumber, RegisterNumber, RegisterNumber)
-    case And            (RegisterNumber, RegisterNumber, RegisterNumber)
-    case Or             (RegisterNumber, RegisterNumber, RegisterNumber)
-    case Not            (RegisterNumber, RegisterNumber)
-    case Rotate         (RegisterNumber, RegisterNumber, Int)
-    case Compare        (RegisterNumber, RegisterNumber)
-    case Branch         ([Order], RegisterNumber)
-    case Halt
+    case load           (RegisterNumber, RegisterNumber, RegisterNumber)
+    case store          (RegisterNumber, RegisterNumber, RegisterNumber)
+    case loadImmediate  (RegisterNumber, RegisterValue)
+    case add            (RegisterNumber, RegisterNumber, RegisterNumber)
+    case multiply       (RegisterNumber, RegisterNumber, RegisterNumber)
+    case and            (RegisterNumber, RegisterNumber, RegisterNumber)
+    case or             (RegisterNumber, RegisterNumber, RegisterNumber)
+    case not            (RegisterNumber, RegisterNumber)
+    case rotate         (RegisterNumber, RegisterNumber, Int)
+    case compare        (RegisterNumber, RegisterNumber)
+    case branch         ([Order], RegisterNumber)
+    case halt
 }
 
 internal enum Order {
-    case LT, EQ, GT
+    case lt, eq, gt
 }
 
 internal enum State {
     // universal
-    case Null
-    case GameStart
+    case null
+    case gameStart
     // not used
-    case SuccessDrag
-    case WaitForDrag
+    case successDrag
+    case waitForDrag
     // loadimmediate
-    case WaitForDragRegister
-    case SuccessDragRegister
+    case waitForDragRegister
+    case successDragRegister
     // add, multiply, and, or, not
-    case WaitForDragCalc
-    case SuccessDragCalc
-    case WaitForDragOperand1
-    case WaitForDragOperand2
-    case WaitForDragOperator
-    case WaitForDragResult
+    case waitForDragCalc
+    case successDragCalc
+    case waitForDragOperand1
+    case waitForDragOperand2
+    case waitForDragOperator
+    case waitForDragResult
 }
 
 

@@ -19,14 +19,14 @@ class MemoryBlockView: UIView {
         memoryPositionBlock = InitMemoryPositionBlock()
         memoryDataBlock = InitMemoryDataBlock()
         
-        memoryDataBlock.separatorColor = UIColor.blackColor()
-        memoryPositionBlock.separatorColor = UIColor.blackColor()
+        memoryDataBlock.separatorColor = UIColor.black
+        memoryPositionBlock.separatorColor = UIColor.black
         
         self.addSubview(memoryPositionBlock)
         self.addSubview(memoryDataBlock)
         
         self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.redColor().CGColor
+        self.layer.borderColor = UIColor.red.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
