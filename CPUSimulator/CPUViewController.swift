@@ -27,7 +27,7 @@ class CPUViewController: UIViewController {
             //            print("=== will set `state` to \(newValue)")
         }
         didSet{
-//            print("=== did set `state` to \(gameState)")
+            //            print("=== did set `state` to \(gameState)")
             switch gameState {
             case State.gameStart:
                 processInstruction()
@@ -57,6 +57,7 @@ class CPUViewController: UIViewController {
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
+                
         addInstructionViewController()
         
         self.view.addSubview(registerBlockView)
@@ -175,7 +176,7 @@ class CPUViewController: UIViewController {
         }
     }
     
-    func processInstruction(){
+    fileprivate func processInstruction(){
         let instr = instructionBlockController.getCurrentInstruction()
         
         switch instr {
@@ -186,31 +187,31 @@ class CPUViewController: UIViewController {
             gameState = State.waitForDragRegister
             
         case let .add            (rg1, rg2, rg3):
-            processCalcInstr("+", values: [rg1, rg2, rg3])
+            processCalcInstr("+", [rg1, rg2, rg3])
             
         case let .multiply       (rg1, rg2, rg3):
-            processCalcInstr("x", values: [rg1, rg2, rg3])
-
+            processCalcInstr("x", [rg1, rg2, rg3])
+            
         case let .and            (rg1, rg2, rg3):
-            processCalcInstr("And", values: [rg1, rg2, rg3])
-
+            processCalcInstr("And", [rg1, rg2, rg3])
+            
         case let .or             (rg1, rg2, rg3):
-            processCalcInstr("Or", values: [rg1, rg2, rg3])
-
+            processCalcInstr("Or", [rg1, rg2, rg3])
+            
         case let .rotate         (rg1, rg2, val):
-            processCalcInstr("Rotate", values: [rg1, rg2, val])
-
+            processCalcInstr("Rotate", [rg1, rg2, val])
+            
         case let .not            (rg1, rg2):
-            processCalcInstr("Not", values: [rg1, rg2])
+            processCalcInstr("Not", [rg1, rg2])
             
             //        case let .Load           (rg1, rg2, rg3):
             //            return
             //        case let .Store          (rg1, rg2, rg3):
-            //            return
-            //        case let .Compare        (rg1, rg2):
-            //            return
-            //        case let .Branch         (_, rg1): //FIXME
         //            return
+        case let .compare        (rg1, rg2):
+            processCalcInstr("Compare", [8, rg1, rg2])
+        case let .branch         (condition, rg1): //FIXME
+            processCompare(condition, rg1)
         case .halt:
             nextLevel()
             
@@ -219,8 +220,8 @@ class CPUViewController: UIViewController {
         }
         
     }
-
-    func processCalcInstr(_ operation : String, values: [Int]) {
+    
+    fileprivate func processCalcInstr(_ operation : String, _ values: [Int]) {
         if gameState != State.successDragCalc {
             let operand1 = registerBlockView.getRegView(regNum: values[1])
             
@@ -249,10 +250,10 @@ class CPUViewController: UIViewController {
         }
     }
     
-    func processCalculation() {
+    fileprivate func processCalculation() {
         let resultView = aluBlockView.getResultView()
         let op = aluBlockView.getOperatorView().value
-
+        
         let op1 = UInt8(aluBlockView.getOperandView(0).value)!
         var op2 = UInt8()
         
@@ -278,9 +279,23 @@ class CPUViewController: UIViewController {
             }else {
                 resultView.value = String(op1 >> op2)
             }
+        case "Compare":
+            if (op1 > op2) {
+                resultView.value = "GT"
+            }
+            else if (op1 < op2){
+                resultView.value = "LT"
+            }
+            else {
+                resultView.value = "EQ"
+            }
         default:
             return
         }
+    }
+    
+    fileprivate func processCompare(_ condition: String, _ programCounter: Int) {
+        instructionBlockController.enableScrolling();
     }
     
     

@@ -12,6 +12,8 @@ let LEVELS = [
     [
         Instruction.loadImmediate(2, 5),
         Instruction.loadImmediate(3, 2),
+        Instruction.compare(2, 3),
+        Instruction.branch("GT", 2),
         Instruction.add(1, 2, 3),
         Instruction.and(0, 1, 2),
         Instruction.or(3, 0, 1),

@@ -19,12 +19,8 @@ internal enum Instruction {
     case not            (RegisterNumber, RegisterNumber)
     case rotate         (RegisterNumber, RegisterNumber, Int)
     case compare        (RegisterNumber, RegisterNumber)
-    case branch         ([Order], RegisterNumber)
+    case branch         (String, RegisterNumber)
     case halt
-}
-
-internal enum Order {
-    case lt, eq, gt
 }
 
 internal enum State {
@@ -49,6 +45,5 @@ internal enum State {
 
 internal typealias RegisterNumber = Int
 internal typealias RegisterValue = Int
-internal typealias ComparisonResult = Order
 
 

@@ -34,11 +34,12 @@ class RegisterBlockView: UIView {
     }
     
     fileprivate func initRegisters() {
-        for _ in 0..<8 {
+        for _ in 0..<9 {
             let register = RegisterView()
             registers += [register]
             addSubview(register)
         }
+        
     }
     
     fileprivate func positionViews() {
@@ -49,27 +50,35 @@ class RegisterBlockView: UIView {
                 regFrame.origin.x = CGFloat(index * (regWidth + margin))
             }
             // switch row after 4 registers
-            else {
+            else if (index < 8){
                 regFrame.origin.x = CGFloat((index - 4) * (regWidth + margin))
                 regFrame.origin.y = CGFloat(regHeight + margin)
+            }
+            else {
+                regFrame.origin.x = CGFloat(3 * (regWidth + margin))
+                regFrame.origin.y = CGFloat(-regHeight - margin)
             }
             
             registers[index].frame = regFrame
             registers[index].label = "Register " + String(index)
-            setRegValue(regNum: index, regValue: 0)
+            setRegValue(regNum: index, regValue: "0")
         }
-
+        
+        registers[8].label = "Compare"
+        setRegValue(regNum: 8, regValue: "")
+        
     }
     
-    internal func setRegValue(regNum n: Int, regValue v: Int){
-        registers[n].value = String(v)
+    internal func setRegValue(regNum n: Int, regValue v: String){
+        registers[n].value = v
     }
 
-    internal func getRegValue(regNum n: Int, regValue v: Int) -> String {
+    internal func getRegValue(regNum n: Int) -> String {
         return registers[n].label
     }
     
     internal func getRegView(regNum n: Int) -> UIViewWrapper {
         return registers[n]
     }
+    
 }

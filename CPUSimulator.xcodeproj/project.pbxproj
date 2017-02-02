@@ -18,6 +18,8 @@
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
 		40469AA31D57CC58008025B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA21D57CC58008025B2 /* Assets.xcassets */; };
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
+		405A90E71E42EED900B58DB0 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A90E61E42EED900B58DB0 /* UIFont.swift */; };
+		405A90EA1E42F25F00B58DB0 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A90E91E42F25F00B58DB0 /* String.swift */; };
 		405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */; };
 		4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40B1E0CD6D300D61FF6 /* OperandView.swift */; };
 		4066D40E1E0CD70400D61FF6 /* OperatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40D1E0CD70400D61FF6 /* OperatorView.swift */; };
@@ -43,6 +45,8 @@
 		40469AA21D57CC58008025B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40469AA51D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		405A90E61E42EED900B58DB0 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		405A90E91E42F25F00B58DB0 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockView.swift; sourceTree = "<group>"; };
 		4066D40B1E0CD6D300D61FF6 /* OperandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperandView.swift; sourceTree = "<group>"; };
 		4066D40D1E0CD70400D61FF6 /* OperatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		405A90E81E42F24800B58DB0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				405A90E61E42EED900B58DB0 /* UIFont.swift */,
+				405A90E91E42F25F00B58DB0 /* String.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		40F0C4051E1F435200DC2526 /* InstructionBlock */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +162,7 @@
 		40F0C4091E1F440E00DC2526 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				405A90E81E42F24800B58DB0 /* Extensions */,
 				4075222B1DC048DB00365D78 /* DraggableView.swift */,
 				401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */,
 				401980511D8250C100C134DB /* Enums.swift */,
@@ -184,7 +198,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = 4ZC3;
 				TargetAttributes = {
 					40469A941D57CC58008025B2 = {
@@ -231,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F0C40B1E1F57C500DC2526 /* todos.md in Sources */,
+				405A90E71E42EED900B58DB0 /* UIFont.swift in Sources */,
 				401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */,
 				4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */,
 				40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */,
@@ -241,6 +256,7 @@
 				401980521D8250C100C134DB /* Enums.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
 				405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */,
+				405A90EA1E42F25F00B58DB0 /* String.swift in Sources */,
 				4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */,
 				4066D40E1E0CD70400D61FF6 /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
@@ -285,8 +301,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -331,8 +349,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -351,6 +371,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
