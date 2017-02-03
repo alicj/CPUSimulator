@@ -19,7 +19,7 @@ internal enum Instruction {
     case not            (RegisterNumber, RegisterNumber)
     case rotate         (RegisterNumber, RegisterNumber, Int)
     case compare        (RegisterNumber, RegisterNumber)
-    case branch         (String, RegisterNumber)
+    case branch         (Condition, RegisterNumber)
     case halt
 }
 
@@ -45,5 +45,6 @@ internal enum State {
 
 internal typealias RegisterNumber = Int
 internal typealias RegisterValue = Int
+internal typealias Condition = String
 
 
