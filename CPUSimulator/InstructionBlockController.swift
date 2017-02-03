@@ -11,7 +11,6 @@ import UIKit
 class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     fileprivate var instructionBlockView = InstructionBlockView(frame: CGRect(x: 400, y: (700-2*240), width: 600, height: 240))
-        
     fileprivate var level = 0
     fileprivate var programCounter = 0
     
@@ -33,74 +32,41 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     // The number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 5
+        return 1
     }
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return LEVELS[level].count
     }
-    
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        switch component {
-        case 0:
-            return 20.0
-        case 1:
-            return 15 * 20.0
-        case 2, 3, 4:
-            return 3 * 20.0
-        default:
-            return 2 * 20.0
-        }
-    }
-    
-    
+ 
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent col: Int) -> String? {
-        let instr = LEVELS[level][row]
-        // try to get the values of each instruction as a list and call function all together
-        switch instr {
+        switch LEVELS[level][row] {
         case let .load           (rg1, rg2, rg3):
-            return processInstruction(row, col, "Load", [rg1, rg2, rg3])
+            return instructionToString(row, "Load", [rg1, rg2, rg3])
         case let .store          (rg1, rg2, rg3):
-            return processInstruction(row, col, "Store", [rg1, rg2, rg3])
+            return instructionToString(row, "Store", [rg1, rg2, rg3])
         case let .loadImmediate  (rg, val):
-            return processInstruction(row, col, "LoadImmediate", [rg, val])
+            return instructionToString(row, "LoadImmediate", [rg, val])
         case let .add            (rg1, rg2, rg3):
-            return processInstruction(row, col, "Add", [rg1, rg2, rg3])
+            return instructionToString(row, "Add", [rg1, rg2, rg3])
         case let .multiply       (rg1, rg2, rg3):
-            return processInstruction(row, col, "Multiply", [rg1, rg2, rg3])
+            return instructionToString(row, "Multiply", [rg1, rg2, rg3])
         case let .and            (rg1, rg2, rg3):
-            return processInstruction(row, col, "And", [rg1, rg2, rg3])
+            return instructionToString(row, "And", [rg1, rg2, rg3])
         case let .or             (rg1, rg2, rg3):
-            return processInstruction(row, col, "Or", [rg1, rg2, rg3])
+            return instructionToString(row, "Or", [rg1, rg2, rg3])
         case let .not            (rg1, rg2):
-            return processInstruction(row, col, "Not", [rg1, rg2])
+            return instructionToString(row, "Not", [rg1, rg2])
         case let .rotate         (rg1, rg2, val):
-            return processInstruction(row, col, "Rotate", [rg1, rg2, val])
+            return instructionToString(row, "Rotate", [rg1, rg2, val])
         case let .compare        (rg1, rg2):
-            return processInstruction(row, col, "Compare", [rg1, rg2])
-        case let .branch         (_, rg1): //FIXME
-            if col == 0 {
-                return "Branch"
-            }else if col == 2 {
-                return String(rg1)
-            }
-            return "" 
+            return instructionToString(row, "Compare", [rg1, rg2])
+        case let .branch         (condition, rg1):
+            return instructionToString(row, "Branch", condition, rg1)
         case .halt:
-            if col == 0 {
-                return "Halt"
-            }
-            return ""
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        for i in 0...(numberOfComponents(in: instructionBlockView) - 1) {
-            if (i == component) {
-                continue
-            }
-            instructionBlockView.selectRow(row, inComponent: i, animated: true)
+            return instructionToString(row, "Halt", [])
         }
     }
     
@@ -112,18 +78,17 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         return LEVELS[level][programCounter]
     }
     
-    fileprivate func processInstruction(_ row: Int, _ col: Int, _ name: String, _ values: [Int]) -> String {
-        if (col == 0) {
-            return String(row)
-        }
-        else if (col == 1) {
-            return name
-        }else if (col == 4 && values.count == 2) {
-            return ""
-        }else {
-            return String(values[col - 2])
-        }
+    fileprivate func instructionToString(_ row: Int, _ name: String, _ values: [Int]) -> String {
+        var valueString = ""
+
+            for v in values {
+                valueString += String(v).evenPadding(toLength: 3, withPad: " ")
+            }
+        return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + valueString
+    }
     
+    fileprivate func instructionToString(_ row: Int, _ name: String, _ condition: String, _ value: Int) -> String {
+            return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
     }
     
     fileprivate func pickerSelectRow(_ row: Int, animated: Bool) {
