@@ -10,27 +10,24 @@ import UIKit
 
 class RegisterBlockView: UIView {
         
-    fileprivate let margin = 16
-    fileprivate var regWidth: Int
-    fileprivate var regHeight: Int
+    fileprivate let margin = Sizes.margin
+    fileprivate let regWidth = Sizes.register.width
+    fileprivate let regHeight = Sizes.register.height
 
     internal var registers = [RegisterView]()
     
     override init(frame: CGRect) {
-        regWidth = RegisterView().regWidth
-        regHeight = RegisterView().regHeight
         super.init(frame: frame)
-
         initRegisters()
         positionViews()
-        
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.red.cgColor
-        
+        self.layer.backgroundColor = Sizes.debugColor
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        initRegisters()
+        positionViews()
     }
     
     fileprivate func initRegisters() {
@@ -43,7 +40,7 @@ class RegisterBlockView: UIView {
     }
     
     fileprivate func positionViews() {
-        var regFrame = CGRect(x: 0, y:0, width: regWidth, height: regHeight)
+        var regFrame = Sizes.register.frame
         
         for index in 0..<registers.count {
             if(index < 4) {
@@ -56,7 +53,7 @@ class RegisterBlockView: UIView {
             }
             else {
                 regFrame.origin.x = CGFloat(3 * (regWidth + margin))
-                regFrame.origin.y = CGFloat(-regHeight - margin)
+                regFrame.origin.y = CGFloat(regHeight * 2 + margin * 2)
             }
             
             registers[index].frame = regFrame

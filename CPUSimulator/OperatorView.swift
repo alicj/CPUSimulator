@@ -9,10 +9,7 @@
 import UIKit
 
 class OperatorView: UIViewWrapper {
-
-    static let height = 60
-    static let width = 60
-    
+ 
     
     fileprivate let opValue = UILabel()
     
@@ -28,9 +25,9 @@ class OperatorView: UIViewWrapper {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        opValue.frame = (frame: CGRect(x: 0, y:0, width: OperatorView.width, height: OperatorView.height))
+        opValue.frame = frame
         
-        opValue.font = opValue.font.withSize(20)
+        opValue.font = opValue.font.withSize(Sizes.operand.font)
         opValue.textAlignment = NSTextAlignment.center
         opValue.layer.borderWidth = 1
         
@@ -39,7 +36,7 @@ class OperatorView: UIViewWrapper {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 
 }

@@ -27,19 +27,15 @@ internal enum State {
     // universal
     case null
     case gameStart
-    // not used
-    case successDrag
-    case waitForDrag
     // loadimmediate
-    case waitForDragRegister
-    case successDragRegister
-    // add, multiply, and, or, not
-    case waitForDragCalc
-    case successDragCalc
-    case waitForDragOperand1
-    case waitForDragOperand2
-    case waitForDragOperator
-    case waitForDragResult
+    case waitForLoadImmediate
+    case successLoadImmediate
+    // add, multiply, and, or, not, compare
+    case waitForDragOperands
+    case successDragOperands
+    case waitForDragCalcResult
+    //branch
+    case successBranch
 }
 
 

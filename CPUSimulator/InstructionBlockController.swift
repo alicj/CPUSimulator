@@ -8,20 +8,25 @@
 
 import UIKit
 
+protocol InstructionBlockDelegate {
+    func onSuccessBranch()
+}
+
 class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    fileprivate var instructionBlockView = InstructionBlockView(frame: CGRect(x: 400, y: (700-2*240), width: 600, height: 240))
+    fileprivate var instructionBlockView = InstructionBlockView(frame: Sizes.instructionBlock.frame)
     fileprivate var level = 0
     fileprivate var programCounter = 0
+    internal var jumpTo: Int? = nil
+    
+    var delegate: InstructionBlockDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        instructionBlockView.layer.backgroundColor = Sizes.debugColor
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
-        instructionBlockView.isUserInteractionEnabled = false
-        instructionBlockView.layer.borderWidth = 2
-        instructionBlockView.layer.borderColor = UIColor.red.cgColor
+        self.disableScrolling()
         super.view.addSubview(instructionBlockView)
     }
     
@@ -38,6 +43,15 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return LEVELS[level].count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == jumpTo!{
+            print("satisfy")
+            self.disableScrolling()
+            self.jumpTo = nil
+            delegate?.onSuccessBranch()
+        }
     }
  
     // The data to return for the row and component (column) that's being passed in
@@ -91,18 +105,12 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
             return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
     }
     
-    fileprivate func pickerSelectRow(_ row: Int, animated: Bool) {
-        for i in 0...(instructionBlockView.numberOfComponents - 1) {
-            instructionBlockView.selectRow(row, inComponent: i, animated: animated)
-        }
-    }
-    
     internal func nextStage () {
         // still in the same level
         if(programCounter < LEVELS[level].count - 1) {
             programCounter += 1
             // move picker items down by 1
-            pickerSelectRow(programCounter, animated: true)
+            instructionBlockView.selectRow(programCounter, inComponent: 0, animated: true)
         }
             // move to next level
         else {
@@ -118,7 +126,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         level += 1
         programCounter = 0
         instructionBlockView.reloadAllComponents()
-        pickerSelectRow(0, animated: false)
+        instructionBlockView.selectRow(programCounter, inComponent: 0, animated: true)
     }
     
     internal func disableScrolling(){
@@ -127,6 +135,10 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     internal func enableScrolling(){
         instructionBlockView.isUserInteractionEnabled = true
+    }
+    
+    internal func isRowSelected(_ selectetd: Int) {
+        
     }
 
 }

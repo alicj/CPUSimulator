@@ -10,18 +10,6 @@ import UIKit
 
 class RegisterView: UIViewWrapper {
     
-    internal let labelHeight = 24
-    internal let labelWidth = 124
-    internal let valueHeight = 72
-    internal let valueWidth = 124
-    
-    lazy var regHeight: Int = {
-        return self.labelHeight + self.valueHeight
-    }()
-    lazy var regWidth: Int = {
-        return self.labelWidth
-    }()
-    
     fileprivate let regLabel = UILabel()
     fileprivate let regValue = UILabel()
     
@@ -46,11 +34,11 @@ class RegisterView: UIViewWrapper {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        regLabel.frame = (frame: CGRect(x: 0, y:0, width: labelWidth, height: labelHeight))
-        regValue.frame = (frame: CGRect(x: 0, y:labelHeight, width: valueWidth, height: valueHeight))
+        regLabel.frame = Sizes.register.label.frame
+        regValue.frame = Sizes.register.value.frame
         
-        regLabel.font = regLabel.font.withSize(20)
-        regValue.font = regValue.font.withSize(25)
+        regLabel.font = regLabel.font.withSize(Sizes.register.label.font)
+        regValue.font = regValue.font.withSize(Sizes.register.value.font)
         
         regLabel.textAlignment = NSTextAlignment.center
         regValue.textAlignment = NSTextAlignment.center
@@ -64,7 +52,7 @@ class RegisterView: UIViewWrapper {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
 }

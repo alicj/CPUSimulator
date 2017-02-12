@@ -8,11 +8,7 @@
 
 import UIKit
 
-class OperandView: UIViewWrapper {
-    
-    static let height = 80
-    static let width = 80
-    
+class OperandView: UIViewWrapper {    
     
     fileprivate let opValue = UILabel()
     
@@ -30,9 +26,9 @@ class OperandView: UIViewWrapper {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        opValue.frame = (frame: CGRect(x: 0, y:0, width: OperandView.width, height: OperandView.height))
+        opValue.frame = Sizes.operand.frame
         
-        opValue.font = opValue.font.withSize(20)
+        opValue.font = opValue.font.withSize(Sizes.operand.font)
         opValue.textAlignment = NSTextAlignment.center
         opValue.layer.borderWidth = 1
         
@@ -41,7 +37,7 @@ class OperandView: UIViewWrapper {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
 }
