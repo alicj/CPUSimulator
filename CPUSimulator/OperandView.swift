@@ -21,7 +21,7 @@ class OperandView: UIViewWrapper {
         }
     }
     
-    lazy internal var order: String = String()
+    internal var type = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)

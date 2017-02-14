@@ -18,6 +18,13 @@ class OperatorView: UIViewWrapper {
             return opValue.text!
         }
         set {
+            let size: CGSize = (newValue as NSString).size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Sizes.operand.font)])
+            if size.width > opValue.bounds.width {
+                opValue.font = opValue.font.withSize(Sizes.font.medium)
+            }
+            else {
+                opValue.font = opValue.font.withSize(Sizes.font.large)
+            }
             opValue.text = newValue
         }
     }

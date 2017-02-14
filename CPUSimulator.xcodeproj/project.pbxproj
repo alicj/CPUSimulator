@@ -93,12 +93,12 @@
 			isa = PBXGroup;
 			children = (
 				40469A9C1D57CC58008025B2 /* Main.storyboard */,
+				40E09C831DC1AA020040C25D /* CPUViewController.swift */,
 				40F0C4091E1F440E00DC2526 /* Common */,
 				40F0C4071E1F437C00DC2526 /* ALUBlock */,
 				40F0C4061E1F436F00DC2526 /* RegisterBlock */,
 				40F0C4051E1F435200DC2526 /* InstructionBlock */,
 				40F0C4081E1F43A300DC2526 /* MemoryBlock */,
-				40E09C831DC1AA020040C25D /* CPUViewController.swift */,
 				40E09C891DC2F99B0040C25D /* designs.md */,
 				40F0C40A1E1F57C500DC2526 /* todos.md */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,

@@ -10,11 +10,10 @@ import UIKit
 
 class DraggableView: UIViewWrapper {
     
-    static let SIZE:CGSize = CGSize(width: 50, height: 50)
     internal var lastLocation: CGPoint = CGPoint.zero
-    lazy fileprivate var label: UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: DraggableView.SIZE))
-    lazy var property = String() // maybe should change this to `destination` to better suit its purpose
+    internal var type = ""
 
+    lazy fileprivate var label: UILabel = UILabel()
 
     
     override var value: String {
@@ -26,24 +25,25 @@ class DraggableView: UIViewWrapper {
         }
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+                
+        label = UILabel(frame: Sizes.draggable.frame)
         
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.blue.cgColor
         
-        label.textColor = UIColor.blue
         label.textAlignment = NSTextAlignment.center
+        label.font = label.font.withSize(Sizes.draggable.font)
         lastLocation = self.center
 
         self.addSubview(label)
-        
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    internal func setFontSize(size: CGFloat) {
+        label.font = label.font.withSize(size)
+    }
 }

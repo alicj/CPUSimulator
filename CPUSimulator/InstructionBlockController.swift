@@ -47,7 +47,6 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == jumpTo!{
-            print("satisfy")
             self.disableScrolling()
             self.jumpTo = nil
             delegate?.onSuccessBranch()
