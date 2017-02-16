@@ -24,6 +24,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
     fileprivate var registerBlockView = RegisterBlockView(frame: Sizes.registerBlock.frame)
     fileprivate var aluBlockView = ALUBlockView(frame: Sizes.ALUBlock.frame)
 //    fileprivate var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
+    fileprivate var memoryController = MemoryBlockController(style: UITableViewStyle.plain)
     
     fileprivate var gameState: State = State.null {
         didSet{

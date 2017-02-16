@@ -13,6 +13,8 @@
 		16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16187A8C1D7915B1007869BA /* InstructionBlockController.swift */; };
 		400D2E4C1E4EDAA6003CF4CC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E4B1E4EDAA6003CF4CC /* UIColor.swift */; };
 		400D2E4E1E4EDE72003CF4CC /* OperatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E4D1E4EDE72003CF4CC /* OperatorView.swift */; };
+		400D2E501E555272003CF4CC /* MemoryBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E4F1E555272003CF4CC /* MemoryBlockController.swift */; };
+		400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E511E5552C5003CF4CC /* MemoryModel.swift */; };
 		401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */; };
 		401980521D8250C100C134DB /* InstructionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401980511D8250C100C134DB /* InstructionEnum.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
@@ -22,7 +24,6 @@
 		40469AA61D57CC58008025B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469AA41D57CC58008025B2 /* LaunchScreen.storyboard */; };
 		405A90E71E42EED900B58DB0 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A90E61E42EED900B58DB0 /* UIFont.swift */; };
 		405A90EA1E42F25F00B58DB0 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A90E91E42F25F00B58DB0 /* String.swift */; };
-		405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */; };
 		4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40B1E0CD6D300D61FF6 /* OperandView.swift */; };
 		4073A7F31E4D4783001297FC /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4073A7F21E4D4783001297FC /* Sizes.swift */; };
 		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
@@ -40,6 +41,8 @@
 		16187A8C1D7915B1007869BA /* InstructionBlockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockController.swift; sourceTree = "<group>"; };
 		400D2E4B1E4EDAA6003CF4CC /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		400D2E4D1E4EDE72003CF4CC /* OperatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorView.swift; sourceTree = "<group>"; };
+		400D2E4F1E555272003CF4CC /* MemoryBlockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBlockController.swift; sourceTree = "<group>"; };
+		400D2E511E5552C5003CF4CC /* MemoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewWrapper.swift; sourceTree = "<group>"; };
 		401980511D8250C100C134DB /* InstructionEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionEnum.swift; sourceTree = "<group>"; };
 		40469A951D57CC58008025B2 /* CPUSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPUSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,7 +54,6 @@
 		40469AA71D57CC58008025B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		405A90E61E42EED900B58DB0 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		405A90E91E42F25F00B58DB0 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionBlockView.swift; sourceTree = "<group>"; };
 		4066D40B1E0CD6D300D61FF6 /* OperandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperandView.swift; sourceTree = "<group>"; };
 		4073A7F21E4D4783001297FC /* Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
@@ -132,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				16187A8C1D7915B1007869BA /* InstructionBlockController.swift */,
-				405AED021D8523DC00F5FCBC /* InstructionBlockView.swift */,
 			);
 			name = InstructionBlock;
 			sourceTree = "<group>";
@@ -160,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				16187A881D751D72007869BA /* MemoryBlockView.swift */,
+				400D2E4F1E555272003CF4CC /* MemoryBlockController.swift */,
+				400D2E511E5552C5003CF4CC /* MemoryModel.swift */,
 			);
 			name = MemoryBlock;
 			sourceTree = "<group>";
@@ -263,13 +266,14 @@
 				40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */,
 				401980521D8250C100C134DB /* InstructionEnum.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
-				405AED031D8523DC00F5FCBC /* InstructionBlockView.swift in Sources */,
 				405A90EA1E42F25F00B58DB0 /* String.swift in Sources */,
 				4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */,
 				400D2E4E1E4EDE72003CF4CC /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
+				400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */,
 				40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */,
 				16187A831D739D51007869BA /* ALUBlockView.swift in Sources */,
+				400D2E501E555272003CF4CC /* MemoryBlockController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

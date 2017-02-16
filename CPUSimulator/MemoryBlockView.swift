@@ -4,7 +4,7 @@
 //
 //  Created by Eric Xiao on 2016-08-29.
 //  Copyright © 2016 4ZC3. All rights reserved.
-//
+//  http://stackoverflow.com/questions/29153135/how-do-i-create-a-ui-tableview-with-multiple-columns-in-xcode
 
 import UIKit
 

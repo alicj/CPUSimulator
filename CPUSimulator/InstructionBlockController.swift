@@ -14,20 +14,30 @@ protocol InstructionBlockDelegate {
 
 class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    fileprivate var instructionBlockView = InstructionBlockView(frame: Sizes.instructionBlock.frame)
+    fileprivate var instructionBlockView = UIPickerView(frame: Sizes.instructionBlock.frame)
     fileprivate var level = 0
     fileprivate var programCounter = 0
     internal var jumpTo: Int? = nil
     
     var delegate: InstructionBlockDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
         instructionBlockView.layer.backgroundColor = Sizes.debugColor
+        
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
         self.disableScrolling()
-        super.view.addSubview(instructionBlockView)
+        self.view.addSubview(instructionBlockView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     override func didReceiveMemoryWarning() {
