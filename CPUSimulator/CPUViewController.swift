@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CPUViewController: UIViewController, InstructionBlockDelegate {
+class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlockDelegate {
     
     // variables for draggables
     fileprivate var selectedView:UIViewWrapper?
@@ -17,13 +17,16 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
     //    private var targetView: UIViewWrapper?
     fileprivate var currentTargets: [UIViewWrapper] = []
     fileprivate var pendingTargets: [UIViewWrapper] = []
+    fileprivate var draggables: [DraggableView] = []
+    
+    fileprivate let memory: Memory = Memory(count: Int(pow(2.0, 5.0)))
     
     // views and controllers
     fileprivate var instructionBlockController = InstructionBlockController()
     
     fileprivate var registerBlockView = RegisterBlockView(frame: Sizes.registerBlock.frame)
     fileprivate var aluBlockView = ALUBlockView(frame: Sizes.ALUBlock.frame)
-//    fileprivate var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
+    //    fileprivate var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
     fileprivate var memoryController = MemoryBlockController(style: UITableViewStyle.plain)
     
     fileprivate var gameState: State = State.null {
@@ -34,7 +37,10 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
                 processInstruction()
                 
             case State.successLoadImmediate,
-                 State.successBranch:
+                 State.successDragCalcResult,
+                 State.successBranch,
+                 State.successLoad,
+                 State.successStore:
                 if oldValue == State.waitForDragCalcResult {
                     cleanALUViews()
                 }
@@ -53,21 +59,20 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
-                
-        addInstructionViewController()
-        instructionBlockController.delegate = self
+        
+        addControllers()
         
         self.view.addSubview(registerBlockView)
         self.view.addSubview(aluBlockView)
         
-//        registerBlockView.translatesAutoresizingMaskIntoConstraints = false
-//        let registerConstraint = NSLayoutConstraint(item: registerBlockView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 28)
-//        self.view.addConstraints([registerConstraint])
-
-//        self.view.addSubview(aluBlockView)
-//        self.view.addSubview(memoryBlockView)
+        //        registerBlockView.translatesAutoresizingMaskIntoConstraints = false
+        //        let registerConstraint = NSLayoutConstraint(item: registerBlockView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 28)
+        //        self.view.addConstraints([registerConstraint])
         
-        aluBlockView.layer.backgroundColor = Sizes.debugColor
+        //        self.view.addSubview(aluBlockView)
+        //        self.view.addSubview(memoryBlockView)
+        
+        aluBlockView.backgroundColor = Sizes.debugColor
         
         setupGestures()
         
@@ -84,10 +89,20 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
         // Dispose of any resources that can be recreated
     }
     
-    fileprivate func addInstructionViewController() {
+    fileprivate func addControllers() {
         addChildViewController(instructionBlockController)
+        addChildViewController(memoryController)
+        
         self.view.addSubview(instructionBlockController.view)
-        instructionBlockController.didMove(toParentViewController: self)
+        self.view.addSubview(memoryController.tableView!)
+        
+        instructionBlockController.delegate = self
+        memoryController.delegate = self
+        memoryController.setMemory(memory: memory)
+        
+        for childViewController in childViewControllers {
+            childViewController.didMove(toParentViewController: self)
+        }
     }
     
     fileprivate func setupGestures() {
@@ -127,7 +142,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
                 
                 for (i, targetView) in currentTargets.enumerated() {
                     
-                    let targetRect = self.view.convert(targetView.frame, from: targetView.superview)
+                    let targetRect = convertToSuperview(targetView)
                     
                     if draggedView.frame.intersects(targetRect) {
                         switch gameState {
@@ -137,7 +152,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
                             hit = true
                             draggedView.removeFromSuperview()
                             targetView.value = draggedView.value
-                            gameState = State.successLoadImmediate
+                            gameState = State.successDragCalcResult
                             
                         case .waitForDragOperands:
                             if let target = targetView as? OperandView {
@@ -149,23 +164,30 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
                                         currentTargets.remove(at: i)
                                     }
                                 }
-                            }else {
-                                if draggedView.type == "operator" {
-                                    hit = true
-                                    draggedView.removeFromSuperview()
-                                    targetView.value = draggedView.value
-                                    currentTargets.remove(at: i)
-                                }
+                            }else if draggedView.type == "operator" {
+                                hit = true
+                                draggedView.removeFromSuperview()
+                                targetView.value = draggedView.value
+                                currentTargets.remove(at: i)
+                                
                             }
                             
                             if currentTargets.count == 0 {
                                 gameState = State.successDragOperands
                             }
                             
+                        case .waitForStore:
+                            memory.set(pointer: Int(targetView.value)!, value: Int(draggedView.value)!)
+                            memoryController.tableView.reloadData()
+                            draggedView.removeFromSuperview()
+                            gameState = State.successStore
+                            
+                        case .waitForLoad:
+                            return
+                            
                         default:
                             return
                         }
-                        
                     }
                 }
                 
@@ -186,7 +208,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
         switch instr {
             
         case let .loadImmediate  (rg, val):
-            createDraggable(Sizes.draggable.instruction_origin, value: String(val), type: "register")
+            createDraggable(origin: Sizes.draggable.originForInstruction, offset: CGPoint.zero, value: String(val), type: "register")
             currentTargets.append(registerBlockView.getRegView(regNum: rg))
             gameState = State.waitForLoadImmediate
             
@@ -208,19 +230,23 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
         case let .not            (rg1, rg2):
             processCalcInstr("Not", [rg1, rg2])
             
-            //        case let .Load           (rg1, rg2, rg3):
-            //            return
-            //        case let .Store          (rg1, rg2, rg3):
-        //            return
+        case let .load           (rg1, rg2):
+            registerBlockView.getRegView(regNum: rg1).value = String(memory.get(pointer: Int(registerBlockView.getRegView(regNum: rg2).value)!))
+            nextLevel()
+            return
+            
+        case let .store          (rg1, rg2):
+            processStore(toMemory: rg1, fromRegister: rg2)
+            
         case let .compare        (rg1, rg2):
             processCalcInstr("Compare", [8, rg1, rg2])
-        case let .branch         (condition, rg1): //FIXME
+            
+        case let .branch         (condition, rg1):
             processBranch(condition, rg1)
+            
         case .halt:
             nextLevel()
             
-        default:
-            return
         }
         
     }
@@ -229,11 +255,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
         // generate draggables for operands and operator
         if gameState != State.successDragOperands {
             let operand1 = registerBlockView.getRegView(regNum: values[1])
-            var origin = convertRect(operand1).origin
-            origin.x += CGFloat((Sizes.register.value.width - Sizes.draggable.width) / 2)
-            origin.y += CGFloat((Sizes.register.value.height - Sizes.draggable.height) / 2 + Sizes.register.label.height)
-            createDraggable(origin, value: operand1.value, type: "operand1")
-            createDraggable(Sizes.draggable.operator_origin, value: operation, type: "operator")
+            
+            createDraggable(origin: convertToSuperview(operand1).origin, offset: Sizes.draggable.offsetForRegister, value: operand1.value, type: "operand1")
+            createDraggable(origin: Sizes.draggable.originForOperator, offset: CGPoint.zero, value: operation, type: "operator")
             
             currentTargets.append(aluBlockView.getOperandView(0))
             currentTargets.append(aluBlockView.getOperatorView())
@@ -242,20 +266,19 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
             
             if values.count > 2 {
                 let operand2 = registerBlockView.getRegView(regNum: values[2])
-                origin = convertRect(operand2).origin
-                origin.x += CGFloat((Sizes.register.value.width - Sizes.draggable.width) / 2)
-                origin.y += CGFloat((Sizes.register.value.height - Sizes.draggable.height) / 2 + Sizes.register.label.height)
-                createDraggable(origin, value: operand2.value, type: "operand2")
+                
+                createDraggable(origin: convertToSuperview(operand2).origin, offset: Sizes.draggable.offsetForRegister, value: operand2.value, type: "operand2")
+                
                 currentTargets.append(aluBlockView.getOperandView(1))
             }
             
             gameState = State.waitForDragOperands
             
         }
-        // generate draggables for calculaiton result
+            // generate draggables for calculaiton result
         else{
             let resultView = aluBlockView.getResultView()
-            createDraggable(convertRect(resultView).origin, value: resultView.value, type: "register")
+            createDraggable(origin: convertToSuperview(resultView).origin, offset: CGPoint.zero, value: resultView.value, type: "register")
             
             currentTargets.append(registerBlockView.getRegView(regNum: values[0]))
             gameState = State.waitForDragCalcResult
@@ -310,22 +333,68 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
         instructionBlockController.jumpTo = jumpTo
     }
     
-    func onSuccessBranch() {
+    fileprivate func processLoad() {
+        
+    }
+    
+    fileprivate func processStore(toMemory destination: Int, fromRegister origin: Int) {
+        gameState = State.waitForStore
+        
+        let address = Int(registerBlockView.getRegView(regNum: destination).value)!
+        let sourceRegister = registerBlockView.getRegView(regNum: origin)
+        
+        createDraggable(origin: convertToSuperview(sourceRegister).origin, offset: Sizes.draggable.offsetForRegister, value: sourceRegister.value, type: "register")
+        
+        // only do the following if cell is visible
+        let targetCell = memoryController.tableView.cellForRow(at: IndexPath(row: address, section: 0))
+        
+        if (targetCell == nil) {
+            return
+        }
+        
+        let targetView = UIViewWrapper(frame: convertToSuperview(targetCell!))
+        targetView.value = String(address)
+        
+        currentTargets.append(targetView)
+    }
+    
+    internal func onSuccessBranch() {
         gameState = State.successBranch
     }
     
-    fileprivate func createDraggable(_ origin: CGPoint, value: String, type: String) {
-        let draggable = DraggableView(frame: CGRect(origin: origin, size: Sizes.draggable.size))
+    internal func onMemoryScroll() {
+        if (gameState == State.waitForStore || gameState == State.waitForLoad) {
+            for targetView in currentTargets {
+                targetView.removeFromSuperview()
+            }
+            for draggable in draggables {
+                draggable.removeFromSuperview()
+            }
+        }
+    }
+    
+    internal func endMemoryScroll() {
+        print("end memory scroll")
+        if (gameState == State.waitForStore || gameState == State.waitForLoad) {
+            processInstruction()
+        }
+    }
+    
+    // consider takign a view instead of origin, and do the convert + get origin inside
+    fileprivate func createDraggable(origin: CGPoint, offset: CGPoint, value: String, type: String) {
+        print ("creating draggable \(type) with value \(value)")
+        let newOrigin = CGPoint(x: origin.x + offset.x, y: origin.y + offset.y)
+        let draggable = DraggableView(frame: CGRect(origin: newOrigin, size: Sizes.draggable.size))
         draggable.value = value
         draggable.type = type
         
-        let size: CGSize = (value as NSString).size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Sizes.draggable.font)])
+        let size = (value as NSString).size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: Sizes.draggable.font)])
         if size.width > draggable.bounds.width {
             draggable.setFontSize(size: Sizes.font.medium)
         }
+        draggables.append(draggable)
         self.view.addSubview(draggable)
     }
-    
     
     fileprivate func nextLevel() {
         cleanUp()
@@ -343,10 +412,11 @@ class CPUViewController: UIViewController, InstructionBlockDelegate {
     fileprivate func cleanUp() {
         currentTargets = []
         pendingTargets = []
+        draggables = []
         selectedView = nil
     }
     
-    fileprivate func convertRect(_ view : UIView) -> CGRect {
+    fileprivate func convertToSuperview(_ view : UIView) -> CGRect {
         return self.view.convert(view.frame, from: view.superview)
     }
 }

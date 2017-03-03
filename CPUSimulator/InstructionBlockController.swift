@@ -28,7 +28,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        instructionBlockView.layer.backgroundColor = Sizes.debugColor
+        instructionBlockView.backgroundColor = Sizes.debugColor
         
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
@@ -66,10 +66,10 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent col: Int) -> String? {
         switch LEVELS[level][row] {
-        case let .load           (rg1, rg2, rg3):
-            return instructionToString(row, "Load", [rg1, rg2, rg3])
-        case let .store          (rg1, rg2, rg3):
-            return instructionToString(row, "Store", [rg1, rg2, rg3])
+        case let .load           (rg1, rg2):
+            return instructionToString(row, "Load", [rg1, rg2])
+        case let .store          (rg1, rg2):
+            return instructionToString(row, "Store", [rg1, rg2])
         case let .loadImmediate  (rg, val):
             return instructionToString(row, "LoadImmediate", [rg, val])
         case let .add            (rg1, rg2, rg3):

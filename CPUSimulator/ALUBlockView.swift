@@ -20,14 +20,14 @@ class ALUBlockView: UIView {
         left.type = "operand1"
         
         let right = OperandView(frame: Sizes.operand.frame)
-        right.frame.origin = Sizes.ALUBlock.rightOperandOrigin
+        right.frame.origin = Sizes.ALUBlock.originForRightOperand
         right.type = "operand2"
         
         operatorView = OperatorView(frame: Sizes.operand.frame)
-        operatorView.frame.origin = Sizes.ALUBlock.operatorOrigin
+        operatorView.frame.origin = Sizes.ALUBlock.originForOperator
         
         let bottom = OperandView(frame: Sizes.operand.frame)
-        bottom.frame.origin = Sizes.ALUBlock.resultOrigin
+        bottom.frame.origin = Sizes.ALUBlock.originForResult
         
         operandArray.append(left)
         operandArray.append(right)

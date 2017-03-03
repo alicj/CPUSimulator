@@ -11,7 +11,7 @@ import UIKit
 
 struct Sizes {
     
-    static let debugColor = UIColor(red: 0xEE, green: 0xEE, blue: 0xEE).cgColor
+    static let debugColor = UIColor(red: 0xEE, green: 0xEE, blue: 0xEE)
     static let margin = 8.0
     
     struct font {
@@ -54,8 +54,13 @@ struct Sizes {
         static let height = operand.height
         static let font = Sizes.font.large
         
-        static let instruction_origin = CGPoint(x: 670.5 - Double(width / 2), y: 103.5 - Double(height / 2))
-        static let operator_origin = CGPoint(x: ALUBlock.x, y: ALUBlock.y + ALUBlock.height)
+        static let offsetForRegister = CGPoint(
+            x: (Sizes.register.value.width - Sizes.draggable.width) / 2,
+            y: (Sizes.register.value.height - Sizes.draggable.height) / 2 + Sizes.register.label.height
+        )
+        
+        static let originForInstruction = CGPoint(x: 670.5 - Double(width / 2), y: 103.5 - Double(height / 2))
+        static let originForOperator = CGPoint(x: ALUBlock.x, y: ALUBlock.y + ALUBlock.height)
         static let size = CGSize(width: width, height: height)
         static let frame = CGRect(origin: CGPoint.zero, size: size)
     }
@@ -70,14 +75,14 @@ struct Sizes {
     }
     
     struct ALUBlock {
-        static let rightOperandOrigin = CGPoint(x: 1.5 * operand.width, y: 0)
-        static let operatorOrigin = CGPoint(x: 0.75 * operand.width, y: operand.width + margin)
-        static let resultOrigin = CGPoint(x: 0.75 * operand.width, y: (operand.height + margin) * 2)
+        static let originForRightOperand = CGPoint(x: 1.5 * operand.width, y: 0)
+        static let originForOperator = CGPoint(x: 0.75 * operand.width, y: operand.width + margin)
+        static let originForResult = CGPoint(x: 0.75 * operand.width, y: (operand.height + margin) * 2)
         
         static let x = registerBlock.x + (registerBlock.width - width) / 2
         static let y = registerBlock.y + registerBlock.height + margin
-        static let width = Double(rightOperandOrigin.x) + operand.width
-        static let height = Double(resultOrigin.y) + operand.height
+        static let width = Double(originForRightOperand.x) + operand.width
+        static let height = Double(originForResult.y) + operand.height
         
         static let frame = CGRect(x: x, y: y, width: width, height: height)
         
@@ -89,6 +94,16 @@ struct Sizes {
         static let y = 28.0
         static let width = 550.0
         static let height = 150.0
+        static let font = Sizes.font.medium
+        
+        static let frame = CGRect(x: x, y: y, width: width, height: height)
+    }
+    
+    struct memoryBlock {
+        static let x = 28.8
+        static let y = 28.0
+        static let width = 150.0
+        static let height = 996.0
         static let font = Sizes.font.medium
         
         static let frame = CGRect(x: x, y: y, width: width, height: height)

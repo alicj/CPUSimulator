@@ -9,8 +9,8 @@
 import Foundation
 
 internal enum Instruction {
-    case load           (RegisterNumber, RegisterNumber, RegisterNumber)
-    case store          (RegisterNumber, RegisterNumber, RegisterNumber)
+    case load           (RegisterNumber, RegisterNumber) // simplified
+    case store          (RegisterNumber, RegisterNumber) // simplified
     case loadImmediate  (RegisterNumber, RegisterValue)
     case add            (RegisterNumber, RegisterNumber, RegisterNumber)
     case multiply       (RegisterNumber, RegisterNumber, RegisterNumber)
@@ -34,8 +34,14 @@ internal enum State {
     case waitForDragOperands
     case successDragOperands
     case waitForDragCalcResult
-    //branch
+    case successDragCalcResult
+    // branch
     case successBranch
+    // store and load
+    case waitForLoad
+    case waitForStore
+    case successLoad
+    case successStore
 }
 
 

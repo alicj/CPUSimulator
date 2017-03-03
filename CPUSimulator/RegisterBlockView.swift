@@ -19,7 +19,7 @@ class RegisterBlockView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initRegisters()
-        self.layer.backgroundColor = Sizes.debugColor
+        self.backgroundColor = Sizes.debugColor
     }
     
     required init?(coder aDecoder: NSCoder) {

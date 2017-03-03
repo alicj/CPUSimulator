@@ -11,6 +11,10 @@ import Foundation
 class Memory {
     fileprivate var memoryArray: [Int]
     
+    init() {
+        memoryArray = []
+    }
+    
     init(count: Int) {
         memoryArray = Array(repeating: 0, count: count)
     }
