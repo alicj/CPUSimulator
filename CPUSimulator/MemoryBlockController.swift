@@ -28,7 +28,6 @@ class MemoryBlockController: UITableViewController {
         super.viewDidLoad()
         
         tableView = UITableView(frame: Sizes.memoryBlock.frame)
-        self.tableView.bounces = false
         self.tableView.backgroundColor = Sizes.debugColor
 
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -42,18 +41,15 @@ class MemoryBlockController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return memory.count()
     }
     
@@ -85,7 +81,7 @@ class MemoryBlockController: UITableViewController {
         delegate?.onMemoryScroll()
     }
     
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         delegate?.endMemoryScroll()
     }
 

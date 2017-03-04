@@ -12,24 +12,16 @@ let LEVELS = [
     [
         Instruction.loadImmediate(2, 5),
         Instruction.loadImmediate(3, 2),
-        Instruction.store(2, 3),
-        Instruction.store(3, 2),
-        Instruction.store(2, 3),
-        Instruction.store(3, 2),
-        Instruction.store(2, 3),
-        Instruction.store(3, 2),
-        Instruction.load(0, 2),
-        Instruction.halt
-    ],
-    [
-        Instruction.loadImmediate(2, 5),
-        Instruction.loadImmediate(3, 2),
         Instruction.compare(2, 3),
         Instruction.branch("GT", 4),
         Instruction.add(1, 2, 3),
         Instruction.and(0, 1, 2),
         Instruction.or(3, 0, 1),
+        Instruction.store(1, 2),
+        Instruction.store(2, 1),
         Instruction.multiply(1, 0, 3),
+        Instruction.load(0, 3),
+        Instruction.load(1, 2),
         Instruction.not(1, 1),
         Instruction.rotate(5, 1, 3),
         Instruction.halt

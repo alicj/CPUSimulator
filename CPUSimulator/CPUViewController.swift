@@ -23,7 +23,6 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     // views and controllers
     fileprivate var instructionBlockController = InstructionBlockController()
-    
     fileprivate var registerBlockView = RegisterBlockView(frame: Sizes.registerBlock.frame)
     fileprivate var aluBlockView = ALUBlockView(frame: Sizes.ALUBlock.frame)
     //    fileprivate var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
@@ -183,6 +182,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
                             gameState = State.successStore
                             
                         case .waitForLoad:
+                            targetView.value = String(memory.get(pointer: Int(draggedView.value)!))
+                            draggedView.removeFromSuperview()
+                            gameState = State.successLoad
                             return
                             
                         default:
@@ -231,9 +233,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             processCalcInstr("Not", [rg1, rg2])
             
         case let .load           (rg1, rg2):
-            registerBlockView.getRegView(regNum: rg1).value = String(memory.get(pointer: Int(registerBlockView.getRegView(regNum: rg2).value)!))
-            nextLevel()
-            return
+            processLoad(toRegister: rg1, fromMemory: rg2)
             
         case let .store          (rg1, rg2):
             processStore(toMemory: rg1, fromRegister: rg2)
@@ -333,8 +333,21 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         instructionBlockController.jumpTo = jumpTo
     }
     
-    fileprivate func processLoad() {
+    fileprivate func processLoad(toRegister destination: Int, fromMemory origin: Int ) {
+        gameState = State.waitForLoad
         
+        let address = Int(registerBlockView.getRegView(regNum: origin).value)!
+        let destRegister = registerBlockView.getRegView(regNum: destination)
+        let targetCell = memoryController.tableView.cellForRow(at: IndexPath(row: address, section: 0))
+        
+        if (targetCell == nil) {
+            // targetCell not in view
+            return
+        }
+        
+        createDraggable(origin: convertToSuperview(targetCell!).origin, offset: CGPoint.zero, value: String(memory.get(pointer: address)), type: "memory")
+        
+        currentTargets.append(destRegister)
     }
     
     fileprivate func processStore(toMemory destination: Int, fromRegister origin: Int) {
@@ -342,18 +355,17 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         
         let address = Int(registerBlockView.getRegView(regNum: destination).value)!
         let sourceRegister = registerBlockView.getRegView(regNum: origin)
-        
-        createDraggable(origin: convertToSuperview(sourceRegister).origin, offset: Sizes.draggable.offsetForRegister, value: sourceRegister.value, type: "register")
-        
-        // only do the following if cell is visible
         let targetCell = memoryController.tableView.cellForRow(at: IndexPath(row: address, section: 0))
         
         if (targetCell == nil) {
+            // targetCell not in view
             return
         }
         
         let targetView = UIViewWrapper(frame: convertToSuperview(targetCell!))
         targetView.value = String(address)
+        
+        createDraggable(origin: convertToSuperview(sourceRegister).origin, offset: Sizes.draggable.offsetForRegister, value: sourceRegister.value, type: "register")
         
         currentTargets.append(targetView)
     }
@@ -364,25 +376,17 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     internal func onMemoryScroll() {
         if (gameState == State.waitForStore || gameState == State.waitForLoad) {
-            for targetView in currentTargets {
-                targetView.removeFromSuperview()
-            }
-            for draggable in draggables {
-                draggable.removeFromSuperview()
-            }
+            cleanUp()
         }
     }
     
     internal func endMemoryScroll() {
-        print("end memory scroll")
         if (gameState == State.waitForStore || gameState == State.waitForLoad) {
             processInstruction()
         }
     }
     
-    // consider takign a view instead of origin, and do the convert + get origin inside
     fileprivate func createDraggable(origin: CGPoint, offset: CGPoint, value: String, type: String) {
-        print ("creating draggable \(type) with value \(value)")
         let newOrigin = CGPoint(x: origin.x + offset.x, y: origin.y + offset.y)
         let draggable = DraggableView(frame: CGRect(origin: newOrigin, size: Sizes.draggable.size))
         draggable.value = value
@@ -412,6 +416,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     fileprivate func cleanUp() {
         currentTargets = []
         pendingTargets = []
+        for draggable in draggables {
+            draggable.removeFromSuperview()
+        }
         draggables = []
         selectedView = nil
     }
