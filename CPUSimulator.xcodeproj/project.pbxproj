@@ -26,6 +26,7 @@
 		4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40B1E0CD6D300D61FF6 /* OperandView.swift */; };
 		4073A7F31E4D4783001297FC /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4073A7F21E4D4783001297FC /* Sizes.swift */; };
 		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
+		40C682DE1E6A815200A5567F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C682DD1E6A815200A5567F /* Util.swift */; };
 		40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C831DC1AA020040C25D /* CPUViewController.swift */; };
 		40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E09C871DC1AED60040C25D /* RegisterView.swift */; };
 		40E09C8A1DC2F99B0040C25D /* designs.md in Resources */ = {isa = PBXBuildFile; fileRef = 40E09C891DC2F99B0040C25D /* designs.md */; };
@@ -55,6 +56,7 @@
 		4066D40B1E0CD6D300D61FF6 /* OperandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperandView.swift; sourceTree = "<group>"; };
 		4073A7F21E4D4783001297FC /* Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
+		40C682DD1E6A815200A5567F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		40E09C831DC1AA020040C25D /* CPUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPUViewController.swift; sourceTree = "<group>"; };
 		40E09C871DC1AED60040C25D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		40E09C891DC2F99B0040C25D /* designs.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = designs.md; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				401980511D8250C100C134DB /* InstructionEnum.swift */,
 				40E5C3201D8496B4004FC0EC /* Levels.swift */,
 				4073A7F21E4D4783001297FC /* Sizes.swift */,
+				40C682DD1E6A815200A5567F /* Util.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -209,7 +212,9 @@
 				TargetAttributes = {
 					40469A941D57CC58008025B2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = K4KQN22LWJ;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -254,6 +259,7 @@
 				405A90E71E42EED900B58DB0 /* UIFont.swift in Sources */,
 				401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */,
 				4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */,
+				40C682DE1E6A815200A5567F /* Util.swift in Sources */,
 				40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */,
 				16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */,
 				16187A811D737733007869BA /* RegisterBlockView.swift in Sources */,
@@ -315,7 +321,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zichen.jiang16@gmail.com (UKFVS86JED)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -334,7 +340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -363,7 +369,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zichen.jiang16@gmail.com (UKFVS86JED)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -376,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -389,6 +395,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K4KQN22LWJ;
 				INFOPLIST_FILE = CPUSimulator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cs.4zc3.CPUSimulator;
@@ -401,6 +409,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K4KQN22LWJ;
 				INFOPLIST_FILE = CPUSimulator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cs.4zc3.CPUSimulator;

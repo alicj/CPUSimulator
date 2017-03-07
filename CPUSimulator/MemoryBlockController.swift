@@ -29,7 +29,7 @@ class MemoryBlockController: UITableViewController {
         
         tableView = UITableView(frame: Sizes.memoryBlock.frame)
         self.tableView.backgroundColor = Sizes.debugColor
-
+        
 //        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
 
         // Uncomment the following line to preserve selection between presentations
@@ -57,13 +57,43 @@ class MemoryBlockController: UITableViewController {
         cell.backgroundColor = UIColor.clear
 
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "header"
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Sizes.memoryBlock.cell.height);
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(Sizes.memoryBlock.cell.height);
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header: UIView = UIView(frame: Sizes.memoryBlock.cell.frame)
         
+        let memoryLabel: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForLeftColumn)
+        let memoryValue: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForRightColumn)
+        
+        memoryLabel.textAlignment = NSTextAlignment.center
+        memoryValue.textAlignment = NSTextAlignment.center
+        memoryLabel.text = "Address"
+        memoryValue.text = "Value"
+        
+        header.addSubview(memoryLabel)
+        header.addSubview(memoryValue)
+        header.backgroundColor = Sizes.debugColor
+        
+        return Util.setBottomBorder(view: header)
+
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         
-        let memoryLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 75, height: cell.frame.height))
-        let memoryValue: UILabel = UILabel(frame: CGRect(x: 75, y: 0, width: 75, height: cell.frame.height))
+        let memoryLabel: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForLeftColumn)
+        let memoryValue: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForRightColumn)
         
         memoryLabel.textAlignment = NSTextAlignment.center
         memoryValue.textAlignment = NSTextAlignment.center
