@@ -46,4 +46,6 @@ class DraggableView: UIViewWrapper {
     internal func setFontSize(size: CGFloat) {
         label.font = label.font.withSize(size)
     }
+    
+    
 }

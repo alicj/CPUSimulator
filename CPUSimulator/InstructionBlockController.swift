@@ -62,72 +62,67 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
             delegate?.onSuccessBranch()
         }
     }
- 
+    
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent col: Int) -> String? {
         switch LEVELS[level][row] {
         case let .load           (rg1, rg2):
-            return instructionToString(row, "Load", [rg1, rg2])
+            return instructionToString(row: row, instr: "Load", values: [rg1, rg2])
         case let .store          (rg1, rg2):
-            return instructionToString(row, "Store", [rg1, rg2])
+            return instructionToString(row: row, instr: "Store", values: [rg1, rg2])
         case let .loadImmediate  (rg, val):
-            return instructionToString(row, "LoadImmediate", [rg, val])
+            return instructionToString(row: row, instr: "LoadImmediate", values: [rg, val])
         case let .add            (rg1, rg2, rg3):
-            return instructionToString(row, "Add", [rg1, rg2, rg3])
+            return instructionToString(row: row, instr: "Add", values: [rg1, rg2, rg3])
         case let .multiply       (rg1, rg2, rg3):
-            return instructionToString(row, "Multiply", [rg1, rg2, rg3])
+            return instructionToString(row: row, instr: "Multiply", values: [rg1, rg2, rg3])
         case let .and            (rg1, rg2, rg3):
-            return instructionToString(row, "And", [rg1, rg2, rg3])
+            return instructionToString(row: row, instr: "And", values: [rg1, rg2, rg3])
         case let .or             (rg1, rg2, rg3):
-            return instructionToString(row, "Or", [rg1, rg2, rg3])
+            return instructionToString(row: row, instr: "Or", values: [rg1, rg2, rg3])
         case let .not            (rg1, rg2):
-            return instructionToString(row, "Not", [rg1, rg2])
+            return instructionToString(row: row, instr: "Not", values: [rg1, rg2])
         case let .rotate         (rg1, rg2, val):
-            return instructionToString(row, "Rotate", [rg1, rg2, val])
+            return instructionToString(row: row, instr: "Rotate", values: [rg1, rg2, val])
         case let .compare        (rg1, rg2):
-            return instructionToString(row, "Compare", [rg1, rg2])
+            return instructionToString(row: row, instr: "Compare", values: [rg1, rg2])
         case let .branch         (condition, rg1):
-            return instructionToString(row, "Branch", condition, rg1)
+            return instructionToString(row: row, name: "Branch", condition: condition, value: rg1)
         case .halt:
-            return instructionToString(row, "Halt", [])
+            return instructionToString(row: row, instr: "Halt", values: [])
         }
     }
     
-    // ================
-    // CUSTOM FUNCTIONS
-    // ================
+    
     
     internal func getCurrentInstruction() -> Instruction {
         return LEVELS[level][programCounter]
     }
     
-    fileprivate func instructionToString(_ row: Int, _ name: String, _ values: [Int]) -> String {
+    fileprivate func instructionToString(row: Int, instr: String, values: [Int]) -> String {
         var valueString = ""
-
-            for v in values {
-                valueString += String(v).evenPadding(toLength: 3, withPad: " ")
-            }
-        return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + valueString
+        for v in values {
+            valueString += String(v).evenPadding(toLength: 3, withPad: " ")
+        }
+        return String(row).evenPadding(toLength: 3, withPad: " ") + instr
+            
+            .evenPadding(toLength: 20, withPad: " ") + valueString
     }
     
-    fileprivate func instructionToString(_ row: Int, _ name: String, _ condition: String, _ value: Int) -> String {
-            return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
+    fileprivate func instructionToString(row: Int, name: String, condition: String, value: Int) -> String {
+        return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
     }
     
     internal func nextStage () {
-        // still in the same level
         if(programCounter < LEVELS[level].count - 1) {
             programCounter += 1
-            // move picker items down by 1
             instructionBlockView.selectRow(programCounter, inComponent: 0, animated: true)
         }
-            // move to next level
         else {
             nextLevel()
         }
     }
     
-    // reload the view with new components equal to new level
     fileprivate func nextLevel() {
         if level == LEVELS.count - 1 {
             return
@@ -149,5 +144,5 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     internal func isRowSelected(_ selectetd: Int) {
         
     }
-
+    
 }

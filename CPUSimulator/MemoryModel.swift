@@ -19,12 +19,16 @@ class Memory {
         memoryArray = Array(repeating: 0, count: count)
     }
     
-    public func get(pointer: Int) -> Int {
-        return memoryArray[pointer]
+    init(count: Double) {
+        memoryArray = Array(repeating: 0, count: Int(count))
     }
     
-    public func set(pointer: Int, value: Int){
-        memoryArray[pointer] = value
+    public func get(address: Int) -> Int {
+        return memoryArray[address]
+    }
+    
+    public func set(address: Int, value: Int){
+        memoryArray[address] = value
     }
     
     public func count() -> Int {

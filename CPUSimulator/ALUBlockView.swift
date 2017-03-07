@@ -43,7 +43,7 @@ class ALUBlockView: UIView {
         super.init(coder: aDecoder)
     }
     
-    func getOperandView (_ index: Int) -> OperandView {
+    func getOperandView (index: Int) -> OperandView {
         return operandArray[index]
     }
     

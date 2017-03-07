@@ -29,22 +29,12 @@ class MemoryBlockController: UITableViewController {
         
         tableView = UITableView(frame: Sizes.memoryBlock.frame)
         self.tableView.backgroundColor = Sizes.debugColor
-        
-//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -86,7 +76,6 @@ class MemoryBlockController: UITableViewController {
         header.backgroundColor = Sizes.debugColor
         
         return Util.setBottomBorder(view: header)
-
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,13 +87,12 @@ class MemoryBlockController: UITableViewController {
         memoryLabel.textAlignment = NSTextAlignment.center
         memoryValue.textAlignment = NSTextAlignment.center
         memoryLabel.text = String(indexPath.row)
-        memoryValue.text = String(memory.get(pointer: indexPath.row))
+        memoryValue.text = String(memory.get(address: indexPath.row))
         
         cell.addSubview(memoryLabel)
         cell.addSubview(memoryValue)
 
         return cell
-        
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -115,6 +103,7 @@ class MemoryBlockController: UITableViewController {
         delegate?.endMemoryScroll()
     }
 
+    
     
     func setMemory(memory: Memory) {
         self.memory = memory

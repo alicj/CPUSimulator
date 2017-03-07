@@ -48,7 +48,7 @@ class RegisterBlockView: UIView {
             addSubview(register)
         }
     }
-    
+     
     internal func setRegValue(regNum n: Int, regValue v: String){
         registers[n].value = v
     }

@@ -14,12 +14,11 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     fileprivate var selectedView:UIViewWrapper?
     fileprivate var dragOrigin = CGPoint()
     
-    //    private var targetView: UIViewWrapper?
     fileprivate var currentTargets: [UIViewWrapper] = []
     fileprivate var pendingTargets: [UIViewWrapper] = []
     fileprivate var draggables: [DraggableView] = []
     
-    fileprivate let memory: Memory = Memory(count: Int(pow(2.0, 5.0)))
+    fileprivate let memory: Memory = Memory(count: pow(2.0, 5.0))
     
     // views and controllers
     fileprivate var instructionBlockController = InstructionBlockController()
@@ -56,7 +55,6 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     }
     
     override func viewDidLoad() {
-        // Do any additional setup after loading the view, typically from a nib.
         super.viewDidLoad()
         
         addControllers()
@@ -78,7 +76,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         gameState = State.gameStart
         
         //debug
-        let tap = UITapGestureRecognizer(target: self, action: #selector(CPUViewController.printTouchPoint(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CPUViewController.printTouchPoint(touch:)))
         tap.numberOfTapsRequired = 1
         view.addGestureRecognizer(tap)
     }
@@ -105,22 +103,20 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     }
     
     fileprivate func setupGestures() {
-        let gesture = UIPanGestureRecognizer(target:self, action:#selector(pan(_:)))
+        let gesture = UIPanGestureRecognizer(target:self, action:#selector(pan(rec:)))
         gesture.maximumNumberOfTouches = 1
         gesture.minimumNumberOfTouches = 1
         self.view.addGestureRecognizer(gesture)
     }
     
-    //debug
-    func printTouchPoint(_ touch: UITapGestureRecognizer) {
+    //debug function
+    func printTouchPoint(touch: UITapGestureRecognizer) {
         
         let touchPoint = touch.location(in: self.view)
         print (touchPoint)
-        
     }
     
-    
-    @objc fileprivate func pan(_ rec:UIPanGestureRecognizer) {
+    @objc fileprivate func pan(rec:UIPanGestureRecognizer) {
         let p:CGPoint = rec.location(in: self.view)
         
         switch rec.state {
@@ -176,13 +172,13 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
                             }
                             
                         case .waitForStore:
-                            memory.set(pointer: Int(targetView.value)!, value: Int(draggedView.value)!)
+                            memory.set(address: Int(targetView.value)!, value: Int(draggedView.value)!)
                             memoryController.tableView.reloadData()
                             draggedView.removeFromSuperview()
                             gameState = State.successStore
                             
                         case .waitForLoad:
-                            targetView.value = String(memory.get(pointer: Int(draggedView.value)!))
+                            targetView.value = String(memory.get(address: Int(draggedView.value)!))
                             draggedView.removeFromSuperview()
                             gameState = State.successLoad
                             return
@@ -215,22 +211,22 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             gameState = State.waitForLoadImmediate
             
         case let .add            (rg1, rg2, rg3):
-            processCalcInstr("+", [rg1, rg2, rg3])
+            processCalcInstr(operation: "+", values: [rg1, rg2, rg3])
             
         case let .multiply       (rg1, rg2, rg3):
-            processCalcInstr("x", [rg1, rg2, rg3])
+            processCalcInstr(operation: "x", values: [rg1, rg2, rg3])
             
         case let .and            (rg1, rg2, rg3):
-            processCalcInstr("And", [rg1, rg2, rg3])
+            processCalcInstr(operation: "And", values: [rg1, rg2, rg3])
             
         case let .or             (rg1, rg2, rg3):
-            processCalcInstr("Or", [rg1, rg2, rg3])
+            processCalcInstr(operation: "Or", values: [rg1, rg2, rg3])
             
         case let .rotate         (rg1, rg2, val):
-            processCalcInstr("Rotate", [rg1, rg2, val])
+            processCalcInstr(operation: "Rotate", values: [rg1, rg2, val])
             
         case let .not            (rg1, rg2):
-            processCalcInstr("Not", [rg1, rg2])
+            processCalcInstr(operation: "Not", values: [rg1, rg2])
             
         case let .load           (rg1, rg2):
             processLoad(toRegister: rg1, fromMemory: rg2)
@@ -239,10 +235,10 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             processStore(toMemory: rg1, fromRegister: rg2)
             
         case let .compare        (rg1, rg2):
-            processCalcInstr("Compare", [8, rg1, rg2])
+            processCalcInstr(operation: "Compare", values: [8, rg1, rg2])
             
         case let .branch         (condition, rg1):
-            processBranch(condition, rg1)
+            processBranch(condition: condition, jumpTo: rg1)
             
         case .halt:
             nextLevel()
@@ -251,7 +247,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         
     }
     
-    fileprivate func processCalcInstr(_ operation : String, _ values: [Int]) {
+    fileprivate func processCalcInstr(operation : String, values: [Int]) {
         // generate draggables for operands and operator
         if gameState != State.successDragOperands {
             let operand1 = registerBlockView.getRegView(regNum: values[1])
@@ -259,7 +255,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             createDraggable(origin: convertToSuperview(operand1).origin, offset: Sizes.draggable.offsetForRegister, value: operand1.value, type: "operand1")
             createDraggable(origin: Sizes.draggable.originForOperator, offset: CGPoint.zero, value: operation, type: "operator")
             
-            currentTargets.append(aluBlockView.getOperandView(0))
+            currentTargets.append(aluBlockView.getOperandView(index: 0))
             currentTargets.append(aluBlockView.getOperatorView())
             
             pendingTargets.append(registerBlockView.getRegView(regNum: values[0]))
@@ -269,13 +265,13 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
                 
                 createDraggable(origin: convertToSuperview(operand2).origin, offset: Sizes.draggable.offsetForRegister, value: operand2.value, type: "operand2")
                 
-                currentTargets.append(aluBlockView.getOperandView(1))
+                currentTargets.append(aluBlockView.getOperandView(index: 1))
             }
             
             gameState = State.waitForDragOperands
             
         }
-            // generate draggables for calculaiton result
+        // generate draggables for calculaiton result
         else{
             let resultView = aluBlockView.getResultView()
             createDraggable(origin: convertToSuperview(resultView).origin, offset: CGPoint.zero, value: resultView.value, type: "register")
@@ -289,11 +285,11 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         let resultView = aluBlockView.getResultView()
         let op = aluBlockView.getOperatorView().value
         
-        let op1 = UInt8(aluBlockView.getOperandView(0).value)!
+        let op1 = UInt8(aluBlockView.getOperandView(index: 0).value)!
         var op2 = UInt8()
         
-        if !aluBlockView.getOperandView(1).value.isEmpty {
-            op2 = UInt8(aluBlockView.getOperandView(1).value)!
+        if !aluBlockView.getOperandView(index: 1).value.isEmpty {
+            op2 = UInt8(aluBlockView.getOperandView(index: 1).value)!
         }
         
         switch op {
@@ -328,7 +324,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         }
     }
     
-    fileprivate func processBranch(_ condition: String, _ jumpTo: Int) {
+    fileprivate func processBranch(condition: String, jumpTo: Int) {
         instructionBlockController.enableScrolling()
         instructionBlockController.jumpTo = jumpTo
     }
@@ -345,7 +341,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             return
         }
         
-        createDraggable(origin: convertToSuperview(targetCell!).origin, offset: CGPoint.zero, value: String(memory.get(pointer: address)), type: "memory")
+        createDraggable(origin: convertToSuperview(targetCell!).origin, offset: CGPoint.zero, value: String(memory.get(address: address)), type: "memory")
         
         currentTargets.append(destRegister)
     }
@@ -408,8 +404,8 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     fileprivate func cleanALUViews() {
         aluBlockView.getResultView().value = ""
-        aluBlockView.getOperandView(0).value = ""
-        aluBlockView.getOperandView(1).value = ""
+        aluBlockView.getOperandView(index: 0).value = ""
+        aluBlockView.getOperandView(index: 1).value = ""
         aluBlockView.getOperatorView().value = ""
     }
     
