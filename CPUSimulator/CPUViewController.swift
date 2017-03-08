@@ -17,6 +17,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     fileprivate var currentTargets: [UIViewWrapper] = []
     fileprivate var pendingTargets: [UIViewWrapper] = []
     fileprivate var draggables: [DraggableView] = []
+    fileprivate var hintMessage: UILabel = UILabel(frame: Sizes.hintMessage.frame)
+    fileprivate var timer: Timer = Timer()
+    fileprivate var colourCount: Double = 0
     
     fileprivate let memory: Memory = Memory(count: pow(2.0, 5.0))
     
@@ -61,14 +64,14 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         
         self.view.addSubview(registerBlockView)
         self.view.addSubview(aluBlockView)
+        view.addSubview(hintMessage);
+        hintMessage.numberOfLines = 0
         
         //        registerBlockView.translatesAutoresizingMaskIntoConstraints = false
         //        let registerConstraint = NSLayoutConstraint(item: registerBlockView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 28)
         //        self.view.addConstraints([registerConstraint])
         
-        //        self.view.addSubview(aluBlockView)
-        //        self.view.addSubview(memoryBlockView)
-        
+        self.view.backgroundColor = Sizes.debugColor
         aluBlockView.backgroundColor = Sizes.debugColor
         
         setupGestures()
@@ -178,7 +181,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
                             gameState = State.successStore
                             
                         case .waitForLoad:
-                            targetView.value = String(memory.get(address: Int(draggedView.value)!))
+                            targetView.value = draggedView.value
                             draggedView.removeFromSuperview()
                             gameState = State.successLoad
                             return
@@ -201,48 +204,50 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     }
     
     fileprivate func processInstruction(){
-        let instr = instructionBlockController.getCurrentInstruction()
-        
-        switch instr {
-            
-        case let .loadImmediate  (rg, val):
-            createDraggable(origin: Sizes.draggable.originForInstruction, offset: CGPoint.zero, value: String(val), type: "register")
-            currentTargets.append(registerBlockView.getRegView(regNum: rg))
-            gameState = State.waitForLoadImmediate
-            
-        case let .add            (rg1, rg2, rg3):
-            processCalcInstr(operation: "+", values: [rg1, rg2, rg3])
-            
-        case let .multiply       (rg1, rg2, rg3):
-            processCalcInstr(operation: "x", values: [rg1, rg2, rg3])
-            
-        case let .and            (rg1, rg2, rg3):
-            processCalcInstr(operation: "And", values: [rg1, rg2, rg3])
-            
-        case let .or             (rg1, rg2, rg3):
-            processCalcInstr(operation: "Or", values: [rg1, rg2, rg3])
-            
-        case let .rotate         (rg1, rg2, val):
-            processCalcInstr(operation: "Rotate", values: [rg1, rg2, val])
-            
-        case let .not            (rg1, rg2):
-            processCalcInstr(operation: "Not", values: [rg1, rg2])
-            
-        case let .load           (rg1, rg2):
-            processLoad(toRegister: rg1, fromMemory: rg2)
-            
-        case let .store          (rg1, rg2):
-            processStore(toMemory: rg1, fromRegister: rg2)
-            
-        case let .compare        (rg1, rg2):
-            processCalcInstr(operation: "Compare", values: [8, rg1, rg2])
-            
-        case let .branch         (condition, rg1):
-            processBranch(condition: condition, jumpTo: rg1)
-            
-        case .halt:
-            nextLevel()
-            
+        if let instr = instructionBlockController.getCurrentInstruction() {
+            switch instr {
+                
+            case let .loadImmediate  (rg, val):
+                createDraggable(origin: Sizes.draggable.originForInstruction, offset: CGPoint.zero, value: String(val), type: "register")
+                currentTargets.append(registerBlockView.getRegView(regNum: rg))
+                gameState = State.waitForLoadImmediate
+                
+            case let .add            (rg1, rg2, rg3):
+                processCalcInstr(operation: "+", values: [rg1, rg2, rg3])
+                
+            case let .multiply       (rg1, rg2, rg3):
+                processCalcInstr(operation: "x", values: [rg1, rg2, rg3])
+                
+            case let .and            (rg1, rg2, rg3):
+                processCalcInstr(operation: "And", values: [rg1, rg2, rg3])
+                
+            case let .or             (rg1, rg2, rg3):
+                processCalcInstr(operation: "Or", values: [rg1, rg2, rg3])
+                
+            case let .rotate         (rg1, rg2, val):
+                processCalcInstr(operation: "Rotate", values: [rg1, rg2, val])
+                
+            case let .not            (rg1, rg2):
+                processCalcInstr(operation: "Not", values: [rg1, rg2])
+                
+            case let .load           (rg1, rg2):
+                processLoad(toRegister: rg1, fromMemory: rg2)
+                
+            case let .store          (rg1, rg2):
+                processStore(toMemory: rg1, fromRegister: rg2)
+                
+            case let .compare        (rg1, rg2):
+                processCalcInstr(operation: "Compare", values: [8, rg1, rg2])
+                
+            case let .branch         (condition, rg1):
+                processBranch(condition: condition, jumpTo: rg1)
+                
+            case .halt:
+                nextLevel()
+            }
+        }
+        else {
+            return
         }
         
     }
@@ -271,7 +276,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             gameState = State.waitForDragOperands
             
         }
-        // generate draggables for calculaiton result
+            // generate draggables for calculaiton result
         else{
             let resultView = aluBlockView.getResultView()
             createDraggable(origin: convertToSuperview(resultView).origin, offset: CGPoint.zero, value: resultView.value, type: "register")
@@ -326,7 +331,8 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     fileprivate func processBranch(condition: String, jumpTo: Int) {
         instructionBlockController.enableScrolling()
-        instructionBlockController.jumpTo = jumpTo
+        instructionBlockController.jumpTo = Int(registerBlockView.getRegView(regNum: jumpTo).value)
+        hintMessage.text = "Hint: scroll the instruction block to the correct position"
     }
     
     fileprivate func processLoad(toRegister destination: Int, fromMemory origin: Int ) {
@@ -341,7 +347,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
             return
         }
         
-        createDraggable(origin: convertToSuperview(targetCell!).origin, offset: CGPoint.zero, value: String(memory.get(address: address)), type: "memory")
+        createDraggable(origin: convertToSuperview(targetCell!).origin, offset: Sizes.draggable.offsetForMemory, value: String(memory.get(address: address)), type: "memory")
         
         currentTargets.append(destRegister)
     }
@@ -417,9 +423,24 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         }
         draggables = []
         selectedView = nil
+        hintMessage.text = ""
     }
     
     fileprivate func convertToSuperview(_ view : UIView) -> CGRect {
         return self.view.convert(view.frame, from: view.superview)
+    }
+    
+    internal func endGame() {
+        hintMessage.text = "Congratulations, you have completed all levels!"
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:#selector(CPUViewController.rainbowHint), userInfo: nil, repeats: true)
+    }
+    
+    internal func rainbowHint(){
+        self.hintMessage.textColor = Util.makeColorGradient(frequency1: 0.3, frequency2: 0.3, frequency3: 0.3, phase1: 0, phase2: 2, phase3: 4, len: colourCount)
+        colourCount += 1;
+        
+        if (colourCount > 1000) {
+            timer.invalidate()
+        }
     }
 }

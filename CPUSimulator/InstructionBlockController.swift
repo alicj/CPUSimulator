@@ -10,14 +10,16 @@ import UIKit
 
 protocol InstructionBlockDelegate {
     func onSuccessBranch()
+    func endGame()
 }
 
 class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     fileprivate var instructionBlockView = UIPickerView(frame: Sizes.instructionBlock.frame)
-    fileprivate var level = 0
-    fileprivate var programCounter = 0
+    fileprivate var level: Int = 0
+    fileprivate var programCounter: Int = 0
     internal var jumpTo: Int? = nil
+    fileprivate var outOfInstructions: Bool = false
     
     var delegate: InstructionBlockDelegate?
     
@@ -57,6 +59,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == jumpTo!{
+            self.programCounter = jumpTo! - 1
             self.disableScrolling()
             self.jumpTo = nil
             delegate?.onSuccessBranch()
@@ -95,7 +98,10 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     
     
-    internal func getCurrentInstruction() -> Instruction {
+    internal func getCurrentInstruction() -> Instruction? {
+        if (self.outOfInstructions) {
+            return nil;
+        }
         return LEVELS[level][programCounter]
     }
     
@@ -125,6 +131,8 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     fileprivate func nextLevel() {
         if level == LEVELS.count - 1 {
+            self.outOfInstructions = true
+            delegate!.endGame()
             return
         }
         level += 1

@@ -11,13 +11,22 @@ import UIKit
 
 struct Sizes {
     
-    static let debugColor = UIColor(red: 0xEE, green: 0xEE, blue: 0xEE)
+    static let debugColor = UIColor(red: 0xFA, green: 0xFA, blue: 0xFA)
     static let margin = 8.0
     
     struct font {
         static let large = CGFloat(23)
         static let medium = CGFloat(18)
         static let small = CGFloat(16)
+    }
+    
+    struct hintMessage {
+        static let x = registerBlock.x
+        static let y = registerBlock.y + registerBlock.height * 0.75
+        static let width = registerBlock.width * 0.75
+        static let height = 44.0
+        static let frame = CGRect(x: x, y: y, width: width, height: height)
+        static let font = Sizes.font.medium
     }
     
     struct register {
@@ -44,7 +53,7 @@ struct Sizes {
     
     struct operand {
         static let width = height
-        static let height = register.value.height
+        static let height = register.height
         static let font = Sizes.font.large
         static let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
     }
@@ -53,21 +62,25 @@ struct Sizes {
         static let width = height
         static let height = operand.height
         static let font = Sizes.font.large
+        static let color = UIColor.red
         
         static let offsetForRegister = CGPoint(
-            x: (Sizes.register.value.width - Sizes.draggable.width) / 2,
-            y: (Sizes.register.value.height - Sizes.draggable.height) / 2 + Sizes.register.label.height
+            x: (Sizes.register.width - Sizes.draggable.width) / 2,
+            y: (Sizes.register.height - Sizes.draggable.height) / 2 + Sizes.register.label.height / 2
         )
+        static let offsetForMemory = CGPoint(x: memoryBlock.cell
+            .width * 0.75 - width * 0.5, y: (memoryBlock.cell.height - height) / 2)
         
-        static let originForInstruction = CGPoint(x: 695 - width / 2, y: 103.5 - height / 2)
-        static let originForOperator = CGPoint(x: ALUBlock.x, y: ALUBlock.y + ALUBlock.height)
+        static let originForInstruction = CGPoint(x: 695 - width / 2, y: 108.5 - height / 2)
+        static let originForOperator = CGPoint(x: CGFloat(ALUBlock.x) + ALUBlock.originForOperator.x - CGFloat(width + margin * 2), y: CGFloat(ALUBlock.y) + ALUBlock.originForOperator.y)
+
         static let size = CGSize(width: width, height: height)
         static let frame = CGRect(origin: CGPoint.zero, size: size)
     }
 
     struct registerBlock {
         static let x = 245.0
-        static let y = 186.0
+        static let y = instructionBlock.y + instructionBlock.height + 2 * margin
         static let width = 4 * register.width + 3 * margin
         static let height = 3 * register.width + 2 * margin
         
@@ -80,7 +93,7 @@ struct Sizes {
         static let originForResult = CGPoint(x: 0.75 * operand.width, y: (operand.height + margin * 2 ) * 2)
         
         static let x = registerBlock.x + (registerBlock.width - width) / 2
-        static let y = registerBlock.y + registerBlock.height + margin
+        static let y = registerBlock.y + registerBlock.height + margin * 2
         static let width = Double(originForRightOperand.x) + operand.width
         static let height = Double(originForResult.y) + operand.height
         
@@ -113,7 +126,7 @@ struct Sizes {
         static let x = 28.8
         static let y = 28.0
         static let width = 180.0
-        static let height = 996.0
+        static let height = 975.0
         static let font = Sizes.font.medium
         
         static let frame = CGRect(x: x, y: y, width: width, height: height)

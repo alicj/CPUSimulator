@@ -29,6 +29,7 @@ class MemoryBlockController: UITableViewController {
         
         tableView = UITableView(frame: Sizes.memoryBlock.frame)
         self.tableView.backgroundColor = Sizes.debugColor
+        self.tableView.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {

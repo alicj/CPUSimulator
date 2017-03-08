@@ -14,6 +14,9 @@ class OperandView: UIViewWrapper {
     
     override internal var value: String {
         get {
+            if (opValue.text == nil){
+                return ""
+            }
             return opValue.text!
         }
         set {

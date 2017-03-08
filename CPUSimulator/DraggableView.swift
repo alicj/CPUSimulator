@@ -30,7 +30,8 @@ class DraggableView: UIViewWrapper {
                 
         label = UILabel(frame: Sizes.draggable.frame)
         
-        self.layer.borderWidth = 1
+//        self.layer.borderWidth = 1
+        label.textColor = Sizes.draggable.color
         
         label.textAlignment = NSTextAlignment.center
         label.font = label.font.withSize(Sizes.draggable.font)

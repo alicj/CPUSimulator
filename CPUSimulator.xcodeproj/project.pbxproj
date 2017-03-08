@@ -15,7 +15,7 @@
 		400D2E501E555272003CF4CC /* MemoryBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E4F1E555272003CF4CC /* MemoryBlockController.swift */; };
 		400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E511E5552C5003CF4CC /* MemoryModel.swift */; };
 		401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */; };
-		401980521D8250C100C134DB /* InstructionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401980511D8250C100C134DB /* InstructionEnum.swift */; };
+		401980521D8250C100C134DB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401980511D8250C100C134DB /* Enums.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
 		40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469A9C1D57CC58008025B2 /* Main.storyboard */; };
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
@@ -43,7 +43,7 @@
 		400D2E4F1E555272003CF4CC /* MemoryBlockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBlockController.swift; sourceTree = "<group>"; };
 		400D2E511E5552C5003CF4CC /* MemoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewWrapper.swift; sourceTree = "<group>"; };
-		401980511D8250C100C134DB /* InstructionEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionEnum.swift; sourceTree = "<group>"; };
+		401980511D8250C100C134DB /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		40469A951D57CC58008025B2 /* CPUSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPUSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40469A981D57CC58008025B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40469A9D1D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				405A90E81E42F24800B58DB0 /* Extensions */,
 				4075222B1DC048DB00365D78 /* DraggableView.swift */,
 				401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */,
-				401980511D8250C100C134DB /* InstructionEnum.swift */,
+				401980511D8250C100C134DB /* Enums.swift */,
 				40E5C3201D8496B4004FC0EC /* Levels.swift */,
 				4073A7F21E4D4783001297FC /* Sizes.swift */,
 				40C682DD1E6A815200A5567F /* Util.swift */,
@@ -266,7 +266,7 @@
 				4073A7F31E4D4783001297FC /* Sizes.swift in Sources */,
 				400D2E4C1E4EDAA6003CF4CC /* UIColor.swift in Sources */,
 				40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */,
-				401980521D8250C100C134DB /* InstructionEnum.swift in Sources */,
+				401980521D8250C100C134DB /* Enums.swift in Sources */,
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
 				405A90EA1E42F25F00B58DB0 /* String.swift in Sources */,
 				4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */,
