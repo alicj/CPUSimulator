@@ -84,6 +84,10 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         view.addGestureRecognizer(tap)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
@@ -290,11 +294,11 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         let resultView = aluBlockView.getResultView()
         let op = aluBlockView.getOperatorView().value
         
-        let op1 = UInt8(aluBlockView.getOperandView(index: 0).value)!
-        var op2 = UInt8()
+        let op1 = Int32(aluBlockView.getOperandView(index: 0).value)!
+        var op2 = Int32()
         
         if !aluBlockView.getOperandView(index: 1).value.isEmpty {
-            op2 = UInt8(aluBlockView.getOperandView(index: 1).value)!
+            op2 = Int32(aluBlockView.getOperandView(index: 1).value)!
         }
         
         switch op {
