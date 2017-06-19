@@ -67,8 +67,8 @@ class MemoryBlockController: UITableViewController {
         let memoryLabel: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForLeftColumn)
         let memoryValue: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForRightColumn)
         
-        memoryLabel.textAlignment = NSTextAlignment.center
-        memoryValue.textAlignment = NSTextAlignment.center
+        memoryLabel.textAlignment = .right
+        memoryValue.textAlignment = .center
         memoryLabel.text = "Address"
         memoryValue.text = "Value"
         
@@ -85,8 +85,8 @@ class MemoryBlockController: UITableViewController {
         let memoryLabel: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForLeftColumn)
         let memoryValue: UILabel = UILabel(frame: Sizes.memoryBlock.cell.frameForRightColumn)
         
-        memoryLabel.textAlignment = NSTextAlignment.center
-        memoryValue.textAlignment = NSTextAlignment.center
+        memoryLabel.textAlignment = .center
+        memoryValue.textAlignment = .center
         memoryLabel.text = String(indexPath.row)
         memoryValue.text = String(memory.get(address: indexPath.row))
         

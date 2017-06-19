@@ -62,6 +62,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         
         addControllers()
         
+        registerBlockView.layer.borderWidth = 1
+        aluBlockView.layer.borderWidth = 1
+        
         self.view.addSubview(registerBlockView)
         self.view.addSubview(aluBlockView)
         view.addSubview(hintMessage);
@@ -85,7 +88,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func didReceiveMemoryWarning() {

@@ -30,18 +30,17 @@ class RegisterBlockView: UIView {
     fileprivate func initRegisters() {
         for i in 0..<9 {
             let register = RegisterView(frame: Sizes.register.frame)
-            register.frame.origin.x = CGFloat(i % 4 * Int(regWidth + margin))
+            register.frame.origin.x += CGFloat(i % 3 * Int(regWidth + margin))
             register.label = "Register " + String(i)
             register.value = "0"
             
-            if (i >= 4 && i < 8) {
-                register.frame.origin.y = CGFloat(regHeight + margin)
-            }
-            else if (i == 8) {
-                register.frame.origin.x = CGFloat(3 * (regWidth + margin))
-                register.frame.origin.y = CGFloat(regHeight * 2 + margin * 2)
+            let row = floor(Double(i) / 3.0)
+            register.frame.origin.y += CGFloat(row * (regHeight + margin))
+            
+            
+            if i == 8 {
                 register.label = "Compare"
-                register.value = ""
+                register.value = " "
             }
            
             registers += [register]

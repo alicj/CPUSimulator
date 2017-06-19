@@ -16,27 +16,28 @@ class ALUBlockView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let left = OperandView(frame: Sizes.operand.frame)
-        left.type = "operand1"
+        let op1 = OperandView(frame: Sizes.operand.frame)
+        op1.frame.origin = Sizes.ALUBlock.originForFirstOperand
+        op1.type = "operand1"
         
-        let right = OperandView(frame: Sizes.operand.frame)
-        right.frame.origin = Sizes.ALUBlock.originForRightOperand
-        right.type = "operand2"
+        let op2 = OperandView(frame: Sizes.operand.frame)
+        op2.frame.origin = Sizes.ALUBlock.originForSecondOperand
+        op2.type = "operand2"
         
         operatorView = OperatorView(frame: Sizes.operand.frame)
         operatorView.frame.origin = Sizes.ALUBlock.originForOperator
         
-        let bottom = OperandView(frame: Sizes.operand.frame)
-        bottom.frame.origin = Sizes.ALUBlock.originForResult
+        let result = OperandView(frame: Sizes.operand.frame)
+        result.frame.origin = Sizes.ALUBlock.originForResult
         
-        operandArray.append(left)
-        operandArray.append(right)
-        operandArray.append(bottom)
+        operandArray.append(op1)
+        operandArray.append(op2)
+        operandArray.append(result)
         
-        addSubview(left)
-        addSubview(right)
+        addSubview(op1)
+        addSubview(op2)
         addSubview(operatorView)
-        addSubview(bottom)
+        addSubview(result)
     }
     
     required init?(coder aDecoder: NSCoder) {

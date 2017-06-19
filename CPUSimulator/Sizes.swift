@@ -12,7 +12,13 @@ import UIKit
 struct Sizes {
     
     static let debugColor = UIColor(red: 0xFA, green: 0xFA, blue: 0xFA)
-    static let margin = 8.0
+    static let margin = 5.0
+    static let padding = 10.0
+    static let screenWidth = Double(UIScreen.main.bounds.width)
+    static let screenHeight = Double(UIScreen.main.bounds.height)
+    static let screenPadding = 28.0
+    static let verticlePaddingBtwBlocks = (screenHeight - screenPadding * 2 - instructionBlock.height - registerBlock.height - ALUBlock.height)/2
+
     
     struct font {
         static let large = CGFloat(23)
@@ -32,11 +38,11 @@ struct Sizes {
     struct register {
         static let width = label.width
         static let height = width
-        static let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
+        static let frame = CGRect(origin: CGPoint(x: padding, y: padding), size: CGSize(width: width, height: height))
         
         struct label {
-            static let width = 120.0
-            static let height = 24.0
+            static let width = 115.0
+            static let height = 26.0
             static let font = Sizes.font.small
             static let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
         }
@@ -53,7 +59,7 @@ struct Sizes {
     
     struct operand {
         static let width = height
-        static let height = register.height
+        static let height = register.height - 5.0
         static let font = Sizes.font.large
         static let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
     }
@@ -79,34 +85,37 @@ struct Sizes {
     }
 
     struct registerBlock {
-        static let x = 245.0
-        static let y = instructionBlock.y + instructionBlock.height + 2 * margin
-        static let width = 4 * register.width + 3 * margin
-        static let height = 3 * register.width + 2 * margin
-        
+        static let x = instructionBlock.x + (instructionBlock.width - width) / 2
+        static let y = instructionBlock.y + instructionBlock.height +  verticlePaddingBtwBlocks
+        static let width = 3 * register.width + 2 * margin + 2 * padding
+        static let height = 3 * register.width + 2 * margin + 2 * padding
+
         static let frame = CGRect(x: x, y: y, width: width, height: height)
     }
     
     struct ALUBlock {
-        static let originForRightOperand = CGPoint(x: 1.5 * operand.width, y: 0)
-        static let originForOperator = CGPoint(x: 0.75 * operand.width, y: operand.width + margin * 2)
-        static let originForResult = CGPoint(x: 0.75 * operand.width, y: (operand.height + margin * 2 ) * 2)
+        static let x = registerBlock.x + (registerBlock.width - ALUBlock.width)
+        static let y = registerBlock.y + registerBlock.height + verticlePaddingBtwBlocks
+        static let width = 2 * operand.width + margin + 2 * padding
+        static let height = 3 * operand.width + 2 * margin + 2 * padding
         
-        static let x = registerBlock.x + (registerBlock.width - width) / 2
-        static let y = registerBlock.y + registerBlock.height + margin * 2
-        static let width = Double(originForRightOperand.x) + operand.width
-        static let height = Double(originForResult.y) + operand.height
-        
+        static let originForFirstOperand = CGPoint(x: padding + operand.width + margin, y: padding)
+        static let originForSecondOperand = CGPoint(x: padding + operand.width + margin, y: padding + operand.width + margin)
+
+        static let originForOperator = CGPoint(x: padding, y: padding + operand.width + margin)
+        static let originForResult = CGPoint(x: padding + operand.width + margin, y: padding + 2 * (operand.width + margin))
+
         static let frame = CGRect(x: x, y: y, width: width, height: height)
         
 
     }
     
     struct instructionBlock {
-        static let x = 250.0
+        static let x = 240.0
         static let y = 28.0
         static let width = 500.0
-        static let height = 150.0
+        static let height = 162.0
+        static let rowHeight: CGFloat = 36.0
         static let font = Sizes.font.medium
         
         static let frame = CGRect(x: x, y: y, width: width, height: height)
@@ -118,15 +127,15 @@ struct Sizes {
             static let height = 44.0
             static let width = memoryBlock.width
             
-            static let frameForLeftColumn = CGRect(x: 0, y: 0, width: width/2, height: height)
-            static let frameForRightColumn = CGRect(x: width/2, y: 0, width: width/2, height: height)
+            static let frameForLeftColumn = CGRect(x: 0, y: 0, width: width/2 + 5, height: height)
+            static let frameForRightColumn = CGRect(x: width/2, y: 0, width: width/2 - 5, height: height)
             static let frame = CGRect(x: 0, y: 0, width: width, height: height)
         }
         
-        static let x = 28.8
+        static let x = 28.0
         static let y = 28.0
-        static let width = 180.0
-        static let height = 975.0
+        static let width = 165.0
+        static let height = 968.0
         static let font = Sizes.font.medium
         
         static let frame = CGRect(x: x, y: y, width: width, height: height)

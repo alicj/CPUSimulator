@@ -31,6 +31,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         instructionBlockView.backgroundColor = Sizes.debugColor
+        instructionBlockView.layer.borderWidth = 1
         
         instructionBlockView.delegate = self
         instructionBlockView.dataSource = self
@@ -52,11 +53,16 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         return 1
     }
     
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return Sizes.instructionBlock.rowHeight
+    }
+    
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return LEVELS[level].count
     }
     
+    // on row select
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row == jumpTo!{
             self.programCounter = jumpTo! - 1
@@ -110,13 +116,16 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
         for v in values {
             valueString += String(v).evenPadding(toLength: 3, withPad: " ")
         }
-        return String(row).evenPadding(toLength: 3, withPad: " ") + instr
-            
-            .evenPadding(toLength: 20, withPad: " ") + valueString
+        let str = String(row).padding(toLength: 2, withPad: " ", startingAt: 0) + instr.evenPadding(toLength: 20, withPad: " ") + valueString
+        print (".\(str).")
+
+        return str
     }
     
     fileprivate func instructionToString(row: Int, name: String, condition: String, value: Int) -> String {
-        return String(row).evenPadding(toLength: 3, withPad: " ") + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
+        let str = String(row).padding(toLength: 2, withPad: " ", startingAt: 0) + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
+        print (".\(str).")
+        return str
     }
     
     internal func nextStage () {
