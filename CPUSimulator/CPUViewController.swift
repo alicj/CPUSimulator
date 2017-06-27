@@ -27,8 +27,8 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     fileprivate var instructionBlockController = InstructionBlockController()
     fileprivate var registerBlockView = RegisterBlockView(frame: Sizes.registerBlock.frame)
     fileprivate var aluBlockView = ALUBlockView(frame: Sizes.ALUBlock.frame)
-    //    fileprivate var memoryBlockView = MemoryBlockView(frame: CGRect(x: 50, y: (700-2*240), width: 240, height: 940))
     fileprivate var memoryController = MemoryBlockController(style: UITableViewStyle.plain)
+    fileprivate var pathController = PathController()
     
     fileprivate var gameState: State = State.null {
         didSet{
@@ -61,21 +61,13 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         super.viewDidLoad()
         
         addControllers()
-        
-        registerBlockView.layer.borderWidth = 1
-        aluBlockView.layer.borderWidth = 1
-        
-        self.view.addSubview(registerBlockView)
-        self.view.addSubview(aluBlockView)
-        view.addSubview(hintMessage);
-        hintMessage.numberOfLines = 0
+        addViews()
         
         //        registerBlockView.translatesAutoresizingMaskIntoConstraints = false
         //        let registerConstraint = NSLayoutConstraint(item: registerBlockView, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 28)
         //        self.view.addConstraints([registerConstraint])
         
         self.view.backgroundColor = Sizes.debugColor
-        aluBlockView.backgroundColor = Sizes.debugColor
         
         setupGestures()
         
@@ -99,9 +91,8 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     fileprivate func addControllers() {
         addChildViewController(instructionBlockController)
         addChildViewController(memoryController)
+        addChildViewController(pathController)
         
-        self.view.addSubview(instructionBlockController.view)
-        self.view.addSubview(memoryController.tableView!)
         
         instructionBlockController.delegate = self
         memoryController.delegate = self
@@ -110,6 +101,23 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         for childViewController in childViewControllers {
             childViewController.didMove(toParentViewController: self)
         }
+    }
+    
+    fileprivate func addViews() {
+        self.view.addSubview(pathController.view)
+        
+        self.view.addSubview(instructionBlockController.view)
+        self.view.addSubview(registerBlockView)
+        self.view.addSubview(aluBlockView)
+        self.view.addSubview(memoryController.tableView!)
+        view.addSubview(hintMessage);
+        
+        registerBlockView.layer.borderWidth = 1
+        aluBlockView.layer.borderWidth = 1
+        aluBlockView.backgroundColor = Sizes.debugColor
+        
+        hintMessage.numberOfLines = 0
+        
     }
     
     fileprivate func setupGestures() {
@@ -121,7 +129,8 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     //debug function
     func printTouchPoint(touch: UITapGestureRecognizer) {
-        
+        pathController.animate(pathKey: "instructionBlockToRegisterBlock", digits: "100001110")
+
         let touchPoint = touch.location(in: self.view)
         print (touchPoint)
     }
@@ -383,12 +392,14 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         gameState = State.successBranch
     }
     
+    // clean up draggables when scrolling memory table
     internal func onMemoryScroll() {
         if (gameState == State.waitForStore || gameState == State.waitForLoad) {
             cleanUp()
         }
     }
     
+    // generate draggables when finished scrolling memory table
     internal func endMemoryScroll() {
         if (gameState == State.waitForStore || gameState == State.waitForLoad) {
             processInstruction()

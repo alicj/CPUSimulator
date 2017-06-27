@@ -16,6 +16,10 @@
 		400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400D2E511E5552C5003CF4CC /* MemoryModel.swift */; };
 		401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */; };
 		401980521D8250C100C134DB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401980511D8250C100C134DB /* Enums.swift */; };
+		4031D9881F004CB500D8F1C7 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4031D9871F004CB500D8F1C7 /* Path.swift */; };
+		403566111EF8B2E7009E1C14 /* PathController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403566101EF8B2E7009E1C14 /* PathController.swift */; };
+		403566141EF8BC35009E1C14 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403566131EF8BC35009E1C14 /* PathView.swift */; };
+		403566161EF8C8F3009E1C14 /* PathData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403566151EF8C8F3009E1C14 /* PathData.swift */; };
 		40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40469A981D57CC58008025B2 /* AppDelegate.swift */; };
 		40469A9E1D57CC58008025B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40469A9C1D57CC58008025B2 /* Main.storyboard */; };
 		40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 40469A9F1D57CC58008025B2 /* CPUSimulator.xcdatamodeld */; };
@@ -46,6 +50,10 @@
 		400D2E511E5552C5003CF4CC /* MemoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		401872D51DEE897C00E0EAD6 /* UIViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewWrapper.swift; sourceTree = "<group>"; };
 		401980511D8250C100C134DB /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		4031D9871F004CB500D8F1C7 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		403566101EF8B2E7009E1C14 /* PathController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathController.swift; sourceTree = "<group>"; };
+		403566131EF8BC35009E1C14 /* PathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
+		403566151EF8C8F3009E1C14 /* PathData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathData.swift; sourceTree = "<group>"; };
 		40469A951D57CC58008025B2 /* CPUSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPUSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40469A981D57CC58008025B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40469A9D1D57CC58008025B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +87,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		403566121EF8B2ED009E1C14 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				403566101EF8B2E7009E1C14 /* PathController.swift */,
+				403566131EF8BC35009E1C14 /* PathView.swift */,
+				403566151EF8C8F3009E1C14 /* PathData.swift */,
+				4031D9871F004CB500D8F1C7 /* Path.swift */,
+			);
+			name = Path;
+			sourceTree = "<group>";
+		};
 		40469A8C1D57CC58008025B2 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +129,7 @@
 				40E09C891DC2F99B0040C25D /* designs.md */,
 				40F0C40A1E1F57C500DC2526 /* todos.md */,
 				40469AAD1D57CF3B008025B2 /* Supporting Files */,
+				403566121EF8B2ED009E1C14 /* Path */,
 			);
 			path = CPUSimulator;
 			sourceTree = "<group>";
@@ -266,9 +286,11 @@
 				401872D61DEE897C00E0EAD6 /* UIViewWrapper.swift in Sources */,
 				4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */,
 				40C682DE1E6A815200A5567F /* Util.swift in Sources */,
+				403566141EF8BC35009E1C14 /* PathView.swift in Sources */,
 				40E5C3211D8496B4004FC0EC /* Levels.swift in Sources */,
 				16187A8D1D7915B1007869BA /* InstructionBlockController.swift in Sources */,
 				16187A811D737733007869BA /* RegisterBlockView.swift in Sources */,
+				403566161EF8C8F3009E1C14 /* PathData.swift in Sources */,
 				4073A7F31E4D4783001297FC /* Sizes.swift in Sources */,
 				400D2E4C1E4EDAA6003CF4CC /* UIColor.swift in Sources */,
 				40E09C881DC1AED60040C25D /* RegisterView.swift in Sources */,
@@ -277,12 +299,14 @@
 				40469A991D57CC58008025B2 /* AppDelegate.swift in Sources */,
 				405A90EA1E42F25F00B58DB0 /* String.swift in Sources */,
 				4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */,
+				403566111EF8B2E7009E1C14 /* PathController.swift in Sources */,
 				40C2CC0C1E84C3E5001C79CB /* MenuViewController.swift in Sources */,
 				400D2E4E1E4EDE72003CF4CC /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 				400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */,
 				40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */,
 				16187A831D739D51007869BA /* ALUBlockView.swift in Sources */,
+				4031D9881F004CB500D8F1C7 /* Path.swift in Sources */,
 				400D2E501E555272003CF4CC /* MemoryBlockController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
