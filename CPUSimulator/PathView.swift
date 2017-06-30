@@ -11,7 +11,6 @@ import UIKit
 class PathView: UIView {
     var path: Path = Path()
     
-    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
@@ -36,7 +35,6 @@ class PathView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        
         UIColor.green.setStroke()
         self.path.bezierPath.stroke()
         

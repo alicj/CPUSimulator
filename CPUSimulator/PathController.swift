@@ -8,17 +8,24 @@
 
 import UIKit
 
+protocol PathDelegate {
+    func updateTargetView(nthDigit: Int, withValue: String)
+}
+
 class PathController: UIViewController {
     
     var PATHS: Dictionary<String, Path> = [:]
     var pathViews: [PathView] = []
     var timer: Timer?
-    var times: Int = 0
+    var nthDigit: Int = 0
+    var nthDigitStack: [Int] = []
     
-    var speed: Double = 400.0 // px/s
+    var speed: Double = 100.0 // px/s
     
     var pathKey: String = ""
     var digits: [String] = []
+    
+    var delegate: PathDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,9 +45,6 @@ class PathController: UIViewController {
         pathViews.append(PathView(path: PATHS["instructionBlockToALUBlock"]!))
         pathViews.append(PathView(path: PATHS["registerBlockToALUBlock"]!))
         pathViews.append(PathView(path: PATHS["memoryBlockToRegisterBlock"]!))
-        
-        
-        UIColor.green.setStroke()
         
         for view in pathViews {
             self.view.addSubview(view)
@@ -67,28 +71,26 @@ class PathController: UIViewController {
     }
     
     func runAnimation(_ timer: Timer){
-        print("ran \(times) times")
         if let currentPath: Path = PATHS[pathKey] {
             let duration = currentPath.length / speed
             
-            if times >= digits.count{
-                times = 0
+            if nthDigit >= digits.count{
+                nthDigit = 0
                 return
             }else {
-                let i = digits[times]
-                times += 1
+                let i = digits[nthDigit]
+                nthDigitStack.append(nthDigit)
+                nthDigit += 1
                 var d1 = UILabel()
                 
-                startTimer(delay: 0.1)
-                
+                startTimer(delay: 0.25)
                 
                 UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: .calculationModePaced, animations: {
                     
-                    d1 = UILabel(frame: CGRect(x: 100, y: 100, width: 30, height: 30))
+                    d1 = UILabel(frame: CGRect(x: 100, y: 100, width: 20, height: 20))
                     d1.text = String(i)
-                    d1.layer.backgroundColor = UIColor.red.cgColor
-                    d1.layer.borderWidth = 1
-                    d1.layer.borderColor = UIColor.black.cgColor
+                    d1.textAlignment = .center
+                    d1.layer.backgroundColor = UIColor(white: 1, alpha: 0).cgColor
                     d1.textColor = UIColor.black
                     
                     self.view.addSubview(d1)
@@ -97,17 +99,16 @@ class PathController: UIViewController {
                     let anim = CAKeyframeAnimation(keyPath: "position")
                     anim.path = currentPath.getCGPath()
                     anim.duration = duration
-                    //
-                    //                let tempPath = UIBezierPath(cgPath: currentPath.getCGPath())
-                    //                UIColor.red.setStroke()
-                    //                tempPath.stroke()
                     
                     d1.layer.add(anim, forKey: "animate position along path \(i)")
                     
                 }, completion: { finished in
                     if finished {
-                        print (finished)
-                        d1.removeFromSuperview()
+                        if !self.nthDigitStack.isEmpty {
+                            let nth = self.digits.count - self.nthDigitStack.removeLast() - 1
+                            self.delegate?.updateTargetView(nthDigit: nth, withValue: d1.text!)
+                            d1.removeFromSuperview()
+                        }
                     }
                     return
                 })

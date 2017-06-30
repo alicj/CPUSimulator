@@ -105,7 +105,7 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     
     
     internal func getCurrentInstruction() -> Instruction? {
-        if (self.outOfInstructions) {
+        if self.outOfInstructions {
             return nil;
         }
         return LEVELS[level][programCounter]
@@ -114,17 +114,17 @@ class InstructionBlockController: UIViewController, UIPickerViewDataSource, UIPi
     fileprivate func instructionToString(row: Int, instr: String, values: [Int]) -> String {
         var valueString = ""
         for v in values {
-            valueString += String(v).evenPadding(toLength: 3, withPad: " ")
+            valueString += String(v).evenPad(toLength: 3, withPad: " ")
         }
-        let str = String(row).padding(toLength: 2, withPad: " ", startingAt: 0) + instr.evenPadding(toLength: 20, withPad: " ") + valueString
-        print (".\(str).")
+        let str = String(row).leftPad(toLength: 2, withPad: " ") + instr.evenPad(toLength: 20, withPad: " ") + valueString
+//        print (".\(str).")
 
         return str
     }
     
     fileprivate func instructionToString(row: Int, name: String, condition: String, value: Int) -> String {
-        let str = String(row).padding(toLength: 2, withPad: " ", startingAt: 0) + name.evenPadding(toLength: 20, withPad: " ") + condition.evenPadding(toLength: 3, withPad: " ") + String(value).evenPadding(toLength: 3, withPad: " ")
-        print (".\(str).")
+        let str = String(row).padding(toLength: 2, withPad: " ", startingAt: 0) + name.evenPad(toLength: 20, withPad: " ") + condition.evenPad(toLength: 3, withPad: " ") + String(value).evenPad(toLength: 3, withPad: " ")
+//        print (".\(str).")
         return str
     }
     

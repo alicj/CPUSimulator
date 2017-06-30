@@ -52,7 +52,6 @@ class Path {
     class func calcWidth(points: [CGPoint]) -> CGFloat {
         var max: CGFloat = 0.0
         var min: CGFloat = CGFloat(Double.infinity)
-        print (min)
         
         for point in points {
             if point.x > max {
@@ -86,10 +85,8 @@ class Path {
         var l: Double = 0.0
         
         for i in 0...points.count-2 {
-            print("\(points[i]) and \(points[i+1])")
             l += distanceBetween(a: points[i], b: points[i+1])
         }
-        print (l)
         return l
     }
     

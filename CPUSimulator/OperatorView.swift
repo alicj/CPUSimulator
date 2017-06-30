@@ -33,13 +33,11 @@ class OperatorView: UIViewWrapper {
         super.init(frame: frame)
         
         opValue.frame = frame
-        
         opValue.font = opValue.font.withSize(Sizes.operand.font)
         opValue.textAlignment = NSTextAlignment.center
         opValue.layer.borderWidth = 1
-        
         self.addSubview(opValue)
-        
+        self.type = .operator
     }
     
     required init?(coder aDecoder: NSCoder) {

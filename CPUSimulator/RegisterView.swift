@@ -49,6 +49,7 @@ class RegisterView: UIViewWrapper {
         self.addSubview(regLabel)
         self.addSubview(regValue)
         
+        self.type = .register
     }
     
     required init?(coder aDecoder: NSCoder) {

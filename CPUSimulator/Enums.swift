@@ -44,9 +44,16 @@ internal enum State {
     case successStore
 }
 
+internal enum ViewType {
+    case operand1
+    case operand2
+    case `operator`
+    case register
+    case memory
+    case result
+}
+
 
 internal typealias RegisterNumber = Int
 internal typealias RegisterValue = Int
 internal typealias Condition = String
-
-

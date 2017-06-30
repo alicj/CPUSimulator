@@ -11,9 +11,8 @@ import UIKit
 class DraggableView: UIViewWrapper {
     
     internal var lastLocation: CGPoint = CGPoint.zero
-    internal var type = ""
 
-    lazy fileprivate var label: UILabel = UILabel()
+    fileprivate var label: UILabel = UILabel()
 
     
     override var value: String {
@@ -29,15 +28,23 @@ class DraggableView: UIViewWrapper {
         super.init(frame: frame)
                 
         label = UILabel(frame: Sizes.draggable.frame)
-        
 //        self.layer.borderWidth = 1
         label.textColor = Sizes.draggable.color
-        
         label.textAlignment = NSTextAlignment.center
         label.font = label.font.withSize(Sizes.draggable.font)
         lastLocation = self.center
-
         self.addSubview(label)
+    }
+    
+    convenience init(frame: CGRect, type: ViewType) {
+        self.init(frame: frame)
+        self.type = type
+    }
+    
+    convenience init(frame: CGRect, value: String, type: ViewType) {
+        self.init(frame: frame)
+        self.value = value
+        self.type = type
     }
     
     required init?(coder aDecoder: NSCoder) {

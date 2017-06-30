@@ -30,6 +30,7 @@
 		4066D40C1E0CD6D300D61FF6 /* OperandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066D40B1E0CD6D300D61FF6 /* OperandView.swift */; };
 		4073A7F31E4D4783001297FC /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4073A7F21E4D4783001297FC /* Sizes.swift */; };
 		4075222C1DC048DB00365D78 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4075222B1DC048DB00365D78 /* DraggableView.swift */; };
+		40B71BAD1F0600F7004D6309 /* Binary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B71BAC1F0600F7004D6309 /* Binary.swift */; };
 		40C2CC0C1E84C3E5001C79CB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C2CC0B1E84C3E5001C79CB /* MenuViewController.swift */; };
 		40C2CC0E1E84D876001C79CB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C2CC0D1E84D876001C79CB /* TutorialViewController.swift */; };
 		40C682DE1E6A815200A5567F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C682DD1E6A815200A5567F /* Util.swift */; };
@@ -66,6 +67,7 @@
 		4066D40B1E0CD6D300D61FF6 /* OperandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperandView.swift; sourceTree = "<group>"; };
 		4073A7F21E4D4783001297FC /* Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		4075222B1DC048DB00365D78 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
+		40B71BAC1F0600F7004D6309 /* Binary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binary.swift; sourceTree = "<group>"; };
 		40C2CC0B1E84C3E5001C79CB /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		40C2CC0D1E84D876001C79CB /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		40C682DD1E6A815200A5567F /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -149,9 +151,9 @@
 		405A90E81E42F24800B58DB0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				405A90E61E42EED900B58DB0 /* UIFont.swift */,
 				405A90E91E42F25F00B58DB0 /* String.swift */,
 				400D2E4B1E4EDAA6003CF4CC /* UIColor.swift */,
+				405A90E61E42EED900B58DB0 /* UIFont.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -202,6 +204,7 @@
 				40E5C3201D8496B4004FC0EC /* Levels.swift */,
 				4073A7F21E4D4783001297FC /* Sizes.swift */,
 				40C682DD1E6A815200A5567F /* Util.swift */,
+				40B71BAC1F0600F7004D6309 /* Binary.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				400D2E4E1E4EDE72003CF4CC /* OperatorView.swift in Sources */,
 				40469AA11D57CC58008025B2 /* CPUSimulator.xcdatamodeld in Sources */,
 				400D2E521E5552C5003CF4CC /* MemoryModel.swift in Sources */,
+				40B71BAD1F0600F7004D6309 /* Binary.swift in Sources */,
 				40E09C841DC1AA020040C25D /* CPUViewController.swift in Sources */,
 				16187A831D739D51007869BA /* ALUBlockView.swift in Sources */,
 				4031D9881F004CB500D8F1C7 /* Path.swift in Sources */,

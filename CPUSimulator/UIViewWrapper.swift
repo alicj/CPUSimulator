@@ -11,7 +11,8 @@ import UIKit
 class UIViewWrapper: UIView {
     
     var value: String = ""
-    
+    var type: ViewType?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
  
