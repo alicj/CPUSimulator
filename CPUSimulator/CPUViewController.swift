@@ -108,7 +108,7 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
         print("update target \(nthDigit)th digit with value \(withValue)")
         if lastTargetView != nil {
             if withValue == "1" {
-                let n = Double(lastTargetView!.value)! + pow(2, Double(nthDigit))
+                let n = Int(Double(lastTargetView!.value)! + pow(2, Double(nthDigit)))
                 lastTargetView?.value = String(n)
             }
         }
@@ -198,9 +198,9 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
                         case .waitForLoadImmediate:
                             hit = true
                             draggedView.removeFromSuperview()
-                            targetView.value = draggedView.value
+//                            targetView.value = draggedView.value
                             gameState = State.successDragCalcResult
-                            let bin = Binary.twosComplement(num: Int16(draggedView.value)!)
+                            let bin = BinaryUtils.toBinary(num: Int16(draggedView.value)!)
                             pathController.animate(pathKey: "instructionBlockToRegisterBlock", digits: bin)
                             
                         case .waitForDragOperands:
@@ -453,7 +453,6 @@ class CPUViewController: UIViewController, InstructionBlockDelegate, MemoryBlock
     
     fileprivate func cleanUp() {
         currentTargets = []
-        lastTargetView = nil
         for draggable in draggables {
             draggable.removeFromSuperview()
         }

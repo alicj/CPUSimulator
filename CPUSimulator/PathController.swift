@@ -20,7 +20,7 @@ class PathController: UIViewController {
     var nthDigit: Int = 0
     var nthDigitStack: [Int] = []
     
-    var speed: Double = 100.0 // px/s
+    var speed: Double = 400.0 // px/s
     
     var pathKey: String = ""
     var digits: [String] = []
@@ -105,7 +105,8 @@ class PathController: UIViewController {
                 }, completion: { finished in
                     if finished {
                         if !self.nthDigitStack.isEmpty {
-                            let nth = self.digits.count - self.nthDigitStack.removeLast() - 1
+                            //  let nth = self.digits.count - self.nthDigitStack.removeLast() - 1
+                            let nth = self.nthDigitStack.removeLast()
                             self.delegate?.updateTargetView(nthDigit: nth, withValue: d1.text!)
                             d1.removeFromSuperview()
                         }

@@ -9,15 +9,23 @@
 import Foundation
 
 let LEVELS = [
-    [
-        Instruction.loadImmediate(0, -2),
-        Instruction.loadImmediate(1, 3),
-        Instruction.multiply(2, 0, 1),
-        Instruction.multiply(2, 0, 2),
-        Instruction.multiply(0, 0, 0),
-        Instruction.halt
-    ],
-    [
+        [ // loadimmediate
+            Instruction.loadImmediate(0, -2),
+            Instruction.loadImmediate(1, 3),
+            Instruction.loadImmediate(1, 255),
+            Instruction.loadImmediate(1, 128),
+            Instruction.loadImmediate(1, 13),
+            Instruction.halt
+        ],
+//    [ // negative number
+//        Instruction.loadImmediate(0, -2),
+//        Instruction.loadImmediate(1, 3),
+//        Instruction.multiply(2, 0, 1),
+//        Instruction.multiply(2, 0, 2),
+//        Instruction.multiply(0, 0, 0),
+//        Instruction.halt
+//    ],
+    [ // all commands
         Instruction.loadImmediate(2, 5),
         Instruction.loadImmediate(3, 2),
         Instruction.multiply(4, 2, 3),
